@@ -1,0 +1,96 @@
+[
+    {
+        "name": "emuravjev/mdash",
+        "version": "0.2.1",
+        "version_normalized": "0.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/vitalybaev/mdash-typograph-php.git",
+            "reference": "f6aab27bd9ed008b5c214b6f30e90bb468593cab"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/vitalybaev/mdash-typograph-php/zipball/f6aab27bd9ed008b5c214b6f30e90bb468593cab",
+            "reference": "f6aab27bd9ed008b5c214b6f30e90bb468593cab",
+            "shasum": ""
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8 || ^5.7"
+        },
+        "time": "2017-01-13T05:02:06+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Emuravjev\\Mdash\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Public Domain"
+        ],
+        "authors": [
+            {
+                "name": "Vitaly Baev",
+                "email": "dj@vitalybaev.ru"
+            }
+        ],
+        "description": "PHP версия типографа Муравьева",
+        "keywords": [
+            "russian",
+            "typograph",
+            "Муравьев",
+            "русский",
+            "типограф"
+        ]
+    },
+    {
+        "name": "opencage/geocode",
+        "version": "2.1.0",
+        "version_normalized": "2.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/OpenCageData/php-opencage-geocode.git",
+            "reference": "7fed059d27390712fd74a52daa60f36d34a5abcf"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/OpenCageData/php-opencage-geocode/zipball/7fed059d27390712fd74a52daa60f36d34a5abcf",
+            "reference": "7fed059d27390712fd74a52daa60f36d34a5abcf",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.6.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~7.0",
+            "squizlabs/php_codesniffer": "^2.7"
+        },
+        "time": "2019-05-09T22:40:38+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "OpenCage\\Geocoder\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-2-Clause"
+        ],
+        "authors": [
+            {
+                "name": "OpenCage Data Limited",
+                "email": "info@opencagedata.com",
+                "homepage": "https://opencagedata.com"
+            }
+        ],
+        "description": "A PHP library for geocoding via the OpenCage Geocoder API",
+        "keywords": [
+            "addresses",
+            "geocode",
+            "geocoding",
+            "opencagedata"
+        ]
+    }
+]
