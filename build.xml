@@ -1,0 +1,126 @@
+<project name="jusebcck" default="dist" basedir=".">
+
+    <property name="VERSION" value="0.1.0"/>
+
+    <property name="JOOMLA" value="3.9.1"/>
+    <property name="MIN_JOOMLA_VERSION" value="3.8"/>
+
+    <tstamp>
+        <format property="DATE" pattern="%d.%m.%Y"/>
+    </tstamp>
+
+    <property name="build" value="build"/>
+    <property name="temp" value="temp"/>
+    <property name="dist" value="dist"/>
+
+    <property name="filename" value="pkg_jusebcck_v${VERSION}.zip"/>
+
+    <target name="init" depends="clean">
+        <mkdir dir="${build}"/>
+        <mkdir dir="${temp}"/>
+        <mkdir dir="${dist}"/>
+    </target>
+
+    <target name="temp">
+
+        <copy todir="${temp}">
+            <fileset dir="packages">
+                <include name="**"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+    <target name="replace">
+
+        <copy file="pkg_jusebcck.xml" todir="${build}">
+            <filterchain>
+                <replacetokens>
+                    <token key="version" value="${VERSION}"/>
+                    <token key="minjversion" value="${MIN_JOOMLA_VERSION}"/>
+                    <token key="date" value="${DATE}"/>
+                </replacetokens>
+            </filterchain>
+        </copy>
+
+        <!---->
+
+        <copy file="packages/lib_jusebcck/jusebcck.xml" todir="${temp}/temp/lib_jusebcck">
+            <filterchain>
+                <replacetokens>
+                    <token key="version" value="${VERSION}"/>
+                    <token key="minjversion" value="${MIN_JOOMLA_VERSION}"/>
+                    <token key="date" value="${DATE}"/>
+                </replacetokens>
+            </filterchain>
+        </copy>
+
+        <delete file="${temp}/lib_jusebcck/jusebcck.xml"/>
+        <delete file="${temp}/lib_jusebcck/composer.json"/>
+        <delete file="${temp}/lib_jusebcck/composer.lock"/>
+        <delete file="${temp}/lib_jusebcck/LICENSE.md"/>
+        <delete file="${temp}/lib_jusebcck/scripts.txt"/>
+        <delete file="${temp}/lib_jusebcck/vendor/composer/installed.json"/>
+        <delete file="${temp}/lib_jusebcck/vendor/composer/LICENSE"/>
+
+        <copy file="${temp}/temp/lib_jusebcck/jusebcck.xml" todir="${temp}/lib_jusebcck"/>
+
+        <!---->
+
+        <copy file="packages/plg_system_jusebcck/jusebcck.xml"
+              todir="${temp}/temp/plg_system_jusebcck/">
+            <filterchain>
+                <replacetokens>
+                    <token key="version" value="${VERSION}"/>
+                    <token key="minjversion" value="${MIN_JOOMLA_VERSION}"/>
+                    <token key="date" value="${DATE}"/>
+                </replacetokens>
+            </filterchain>
+        </copy>
+
+        <delete file="${temp}/plg_system_jusebcck/jusebcck.xml"/>
+        <copy file="${temp}/temp/plg_system_jusebcck/jusebcck.xml"
+              todir="${temp}/plg_system_jusebcck"/>
+
+    </target>
+
+    <target name="pack-plugins">
+
+        <mkdir dir="${build}/packages"/>
+
+        <zip destfile="${build}/packages/lib_jusebcck.zip" description="lib_jusebcck">
+            <fileset dir="${temp}/lib_jusebcck"/>
+        </zip>
+
+        <zip destfile="${build}/packages/plg_system_jusebcck.zip" description="plg_system_jusebcck">
+            <fileset dir="${temp}/plg_system_jusebcck"/>
+        </zip>
+
+        <copy file="pkg_jusebcck.xml" todir="${build}"/>
+
+        <copy file="script.php" todir="${build}"/>
+
+    </target>
+
+    <target name="dist" depends="init, temp, replace, pack-plugins">
+
+        <zip destfile="${dist}/${filename}">
+            <fileset dir="${build}/">
+                <include name="**/**"/>
+            </fileset>
+        </zip>
+
+        <echo msg="Removing old files..."/>
+        <delete dir="${build}"/>
+        <delete dir="${temp}"/>
+
+    </target>
+
+    <target name="clean" description="clean up">
+
+        <delete dir="${build}"/>
+        <delete dir="${temp}"/>
+
+    </target>
+
+</project>
