@@ -1,0 +1,54 @@
+{
+  "name": "joomla-ua/jusebcck",
+  "description": "JUSebCCK - library for SEBLOD.",
+  "keywords": [
+    "SEBLOD",
+    "Joomla"
+  ],
+  "homepage": "https://joomla-ua.org",
+  "type": "library",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Denys Nosov",
+      "email": "denys@joomla-ua.org",
+      "homepage": "https://joomla-ua.org",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "denys@joomla-ua.org",
+    "issues": "https://github.com/Joomla-Ukraine/JUSebCCK/issues",
+    "forum": "https://github.com/Joomla-Ukraine/JUSebCCK/issues",
+    "source": "https://github.com/Joomla-Ukraine/JUSebCCK",
+    "docs": "https://github.com/Joomla-Ukraine/JUSebCCK/blob/master/README.md"
+  },
+  "autoload": {
+    "psr-4": {
+      "JUSebCCK\\": "src/"
+    },
+    "classmap": [
+      "src/Classes"
+    ]
+  },
+  "minimum-stability": "stable",
+  "config": {
+    "optimize-autoloader": true,
+    "use-include-path": false,
+    "prepend-autoloader": true,
+    "prefer-dist": true,
+    "no-dev": true,
+    "sort-packages": true,
+    "archive-format": "zip"
+  },
+  "prefer-stable": true,
+  "suggest": {
+  },
+  "require": {
+    "ext-curl": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "emuravjev/mdash": "^0.2.1",
+    "opencage/geocode": "^2.1"
+  }
+}
