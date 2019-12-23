@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="library" version="@minjversion@" method="upgrade">
+    <name>JUSebCCK</name>
+    <libraryname>jusebcck</libraryname>
+    <creationDate>@date@</creationDate>
+    <author>Denys Nosov</author>
+    <authorEmail>denys@joomla-ua.org</authorEmail>
+    <authorUrl>https://joomla-ua.org</authorUrl>
+    <license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
+    <copyright>(C) 2019 Joomla! Ukraine. All rights reserved.</copyright>
+    <version>@version@</version>
+    <packager>Joomla! Ukraine</packager>
+    <packagerurl>https://joomla-ua.org</packagerurl>
+    <files folder="jusebcck">
+        <folder>src</folder>
+        <folder>vendor</folder>
+    </files>
+</extension>

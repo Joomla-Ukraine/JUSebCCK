@@ -24,7 +24,7 @@ class Cache
 	{
 		if(is_dir(JPATH_ROOT . '/cache/'))
 		{
-			if($all === true)
+			if($all === false)
 			{
 				if(is_dir(JPATH_ROOT . '/cache/com_modules/'))
 				{
