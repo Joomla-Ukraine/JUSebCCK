@@ -18,25 +18,57 @@ class Geocode
 {
 	/**
 	 * @param        $address
-	 * @param string $lang
 	 * @param string $api
+	 * @param array  $options
 	 *
 	 * @return mixed
 	 *
 	 * @throws \Exception
 	 * @since 1.0
 	 */
-	public static function OpenCage($address, $lang = 'en', $api = '')
+	public static function OpenCage(array $data = [])
 	{
+		if(empty($data[ 'address' ]) || empty($data[ 'api' ]))
+		{
+			return false;
+		}
+
+		$address = $data[ 'address' ];
+
+		$options = [
+			'language' => 'en'
+		];
+
+		if($data[ 'options' ])
+		{
+			$options = $data[ 'options' ];
+		}
+
 		if(is_array($address))
 		{
 			$address = implode(', ', $address);
 		}
 
-		$geocoder = new OpenCage\Geocoder\Geocoder($api);
+		$geocoder = new OpenCage\Geocoder\Geocoder($data[ 'api' ]);
+		$results  = $geocoder->geocode($address, $options)[ 'results' ];
 
-		return $geocoder->geocode($address, [
-			'language' => $lang
-		]);
+		if($type = $data[ 'type' ])
+		{
+			$data = [];
+			if(count($type) > 0)
+			{
+				foreach($results as $result)
+				{
+					if(in_array($result[ 'components' ][ '_type' ], $type))
+					{
+						$data[] = $result;
+					}
+				}
+			}
+
+			$results = $data;
+		}
+
+		return $results;
 	}
 }
