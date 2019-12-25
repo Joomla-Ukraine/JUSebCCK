@@ -62,19 +62,20 @@ class BeforeStore
 	/**
 	 * @param $config
 	 * @param $fields
-	 * @param $field
+	 * @param $created
+	 * @param $publish_up
 	 *
 	 * @return bool
 	 *
 	 * @since 1.0
 	 */
-	public static function bindDate($config, $fields, $field)
+	public static function bindDate($config, $fields, $created, $publish_up)
 	{
 		if($config[ 'isNew' ] == 1)
 		{
-			if($fields[ $field ]->value)
+			if($fields[ $created ]->value)
 			{
-				$date = $fields[ $field ]->value;
+				$date = $fields[ $created ]->value;
 			}
 			else
 			{
@@ -82,14 +83,15 @@ class BeforeStore
 				$date = date('Y-m-d H:i:s');
 			}
 
-			Data::bind($date, $field, $config, $fields);
+			Data::bind($date, $publish_up, $config, $fields);
 		}
-		elseif($fields[ $field ]->value == '' || empty($fields[ $field ]->value))
+		elseif($fields[ $created ]->value == '')
 		{
 			date_default_timezone_set('UTC');
 			$datenow = date('Y-m-d H:i:s');
 
-			Data::bind($datenow, $field, $config, $fields);
+			Data::bind($datenow, $publish_up, $config, $fields);
+			Data::bind($datenow, $created, $config, $fields);
 		}
 
 		return true;
@@ -98,25 +100,21 @@ class BeforeStore
 	/**
 	 * @param       $config
 	 * @param       $fields
+	 * @param       $provider
 	 * @param array $data
 	 *
 	 * @return bool
 	 *
 	 * @since 1.0
 	 */
-	public static function geoLocation($config, $fields, array $data = [])
+	public static function geoLocation($config, $fields, $provider, array $data = [])
 	{
 		$lat = $fields[ $data[ 'lat' ] ]->value;
 		$lng = $fields[ $data[ 'lng' ] ]->value;
 
-		$language = $data[ 'language' ];
-		$address  = $data[ 'address' ];
-		$provider = $data[ 'provider' ];
-		$api      = $data[ 'api' ] ? $data[ 'api' ] : '';
-
 		if(!($lat || $lng))
 		{
-			$result = Location::{$provider}($address, $language, $api);
+			$result = Location::{$provider}($data);
 
 			Data::bind($result->lat, $data[ 'lat' ], $config, $fields);
 			Data::bind($result->lng, $data[ 'lng' ], $config, $fields);
@@ -128,17 +126,18 @@ class BeforeStore
 	/**
 	 * @param $config
 	 * @param $fields
-	 * @param $field
+	 * @param $check_video
+	 * @param $video_source
 	 *
 	 * @return bool
 	 *
 	 * @since 1.0
 	 */
-	public static function checkVideo($config, $fields, $field)
+	public static function checkVideo($config, $fields, $check_video, $video_source)
 	{
-		$check = Video::check($fields[ $field ]->value);
+		$check = Video::check($fields[ $video_source ]->value);
 
-		Data::bind($check, $field, $config, $fields);
+		Data::bind($check, $check_video, $config, $fields);
 
 		return true;
 	}
