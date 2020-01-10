@@ -12,32 +12,25 @@
 
 namespace JUSebCCK\API;
 
+use JUSebCCK\Utils;
+
 class Location
 {
 	/**
-	 * @param        $address
-	 * @param string $lang
-	 * @param string $api
+	 * @param array $data
 	 *
-	 * @return object
+	 * @return bool|object
 	 *
 	 * @since 1.0
 	 */
-	public static function Google($address, $lang = 'en', $api = '')
+	public static function Google(array $data = [])
 	{
-		if(is_array($address))
+		if(empty($data[ 'address' ]) || empty($data[ 'api' ]))
 		{
-			$address = implode(', ', $address);
+			return false;
 		}
 
-		$api_key = '&sensor=false';
-		if($api)
-		{
-			$api_key = '&key=' . $api;
-		}
-
-		$url     = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address) . '&language=' . $lang . $api_key;
-		$lat_lng = get_object_vars(json_decode(@file_get_contents($url)));
+		$lat_lng = Utils\API::get('https://maps.googleapis.com/maps/api/geocode/json?', $data);
 		$results = $lat_lng[ 'results' ][ 0 ]->geometry->location;
 
 		return (object) [
@@ -47,23 +40,20 @@ class Location
 	}
 
 	/**
-	 * @param        $address
-	 * @param string $api
-	 * @param string $lang
+	 * @param array $data
 	 *
-	 * @return object
+	 * @return bool|object
 	 *
 	 * @since 1.0
 	 */
-	public static function OpenCage($address, $lang = 'en', $api = '')
+	public static function OpenCage(array $data = [])
 	{
-		if(is_array($address))
+		if(empty($data[ 'address' ]) || empty($data[ 'api' ]))
 		{
-			$address = implode(', ', $address);
+			return false;
 		}
 
-		$url     = 'https://api.opencagedata.com/geocode/v1/json?q=' . urlencode($address) . '&key=' . $api . '&language=' . $lang . '&pretty=1&no_annotations=1';
-		$lat_lng = get_object_vars(json_decode(@file_get_contents($url)));
+		$lat_lng = Utils\API::get('https://api.opencagedata.com/geocode/v1/json?', $data);
 		$results = $lat_lng[ 'results' ][ 0 ]->geometry;
 
 		return (object) [
@@ -73,23 +63,20 @@ class Location
 	}
 
 	/**
-	 * @param        $address
-	 * @param string $lang
-	 * @param string $api
+	 * @param array $data
 	 *
-	 * @return object
+	 * @return bool|object
 	 *
 	 * @since 1.0
 	 */
-	public static function MapQuest($address, $lang = 'en', $api = '')
+	public static function MapQuestOpenCage(array $data = [])
 	{
-		if(is_array($address))
+		if(empty($data[ 'address' ]) || empty($data[ 'api' ]))
 		{
-			$address = implode(', ', $address);
+			return false;
 		}
 
-		$url     = 'https://www.mapquestapi.com/geocoding/v1/address?key=' . $api . '&location=' . urlencode($address) . '&lang=' . $lang;
-		$lat_lng = get_object_vars(json_decode(@file_get_contents($url)));
+		$lat_lng = Utils\API::get('https://www.mapquestapi.com/geocoding/v1/address?', $data);
 		$results = $lat_lng[ 'results' ][ 0 ]->locations[ 0 ]->latLng;
 
 		return (object) [
