@@ -64,6 +64,7 @@ class ComposerStaticInit8afeae53c85de1b91834fe6860e1856a
         'JUSebCCK\\Joomla\\User' => __DIR__ . '/../..' . '/src/Joomla/User.php',
         'JUSebCCK\\Tmpl\\Module' => __DIR__ . '/../..' . '/src/Tmpl/Module.php',
         'JUSebCCK\\Tmpl\\Tabs' => __DIR__ . '/../..' . '/src/Tmpl/Tabs.php',
+        'JUSebCCK\\Utils\\API' => __DIR__ . '/../..' . '/src/Utils/API.php',
         'JUSebCCK\\Utils\\Data' => __DIR__ . '/../..' . '/src/Utils/Data.php',
         'JUSebCCK\\Utils\\Folder' => __DIR__ . '/../..' . '/src/Utils/Folder.php',
         'JUSebCCK\\Utils\\HTML' => __DIR__ . '/../..' . '/src/Utils/HTML.php',

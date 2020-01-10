@@ -33,6 +33,7 @@ return array(
     'JUSebCCK\\Joomla\\User' => $baseDir . '/src/Joomla/User.php',
     'JUSebCCK\\Tmpl\\Module' => $baseDir . '/src/Tmpl/Module.php',
     'JUSebCCK\\Tmpl\\Tabs' => $baseDir . '/src/Tmpl/Tabs.php',
+    'JUSebCCK\\Utils\\API' => $baseDir . '/src/Utils/API.php',
     'JUSebCCK\\Utils\\Data' => $baseDir . '/src/Utils/Data.php',
     'JUSebCCK\\Utils\\Folder' => $baseDir . '/src/Utils/Folder.php',
     'JUSebCCK\\Utils\\HTML' => $baseDir . '/src/Utils/HTML.php',
