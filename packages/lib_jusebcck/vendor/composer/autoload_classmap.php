@@ -35,6 +35,7 @@ return array(
     'JUSebCCK\\Tmpl\\Tabs' => $baseDir . '/src/Tmpl/Tabs.php',
     'JUSebCCK\\Utils\\API' => $baseDir . '/src/Utils/API.php',
     'JUSebCCK\\Utils\\Data' => $baseDir . '/src/Utils/Data.php',
+    'JUSebCCK\\Utils\\File' => $baseDir . '/src/Utils/File.php',
     'JUSebCCK\\Utils\\Folder' => $baseDir . '/src/Utils/Folder.php',
     'JUSebCCK\\Utils\\HTML' => $baseDir . '/src/Utils/HTML.php',
     'JUSebCCK\\Utils\\HTTP' => $baseDir . '/src/Utils/HTTP.php',
