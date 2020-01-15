@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d4305be1f527f656922297aa264fe8b",
+    "content-hash": "41094fdd1324ca4169aa62e9591edd06",
     "packages": [
         {
             "name": "emuravjev/mdash",
@@ -95,6 +95,47 @@
                 "opencagedata"
             ],
             "time": "2019-05-09T22:40:38+00:00"
+        },
+        {
+            "name": "visavi/cleanup",
+            "version": "v1.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/visavi/cleanup.git",
+                "reference": "fc13c6376fabe61522d4a3cfeab90e8555c1fbd2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/visavi/cleanup/zipball/fc13c6376fabe61522d4a3cfeab90e8555c1fbd2",
+                "reference": "fc13c6376fabe61522d4a3cfeab90e8555c1fbd2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "bin": [
+                "cleanup"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Grigorev",
+                    "email": "admin@visavi.net",
+                    "homepage": "http://visavi.net"
+                }
+            ],
+            "description": "Cleaning vendor directory",
+            "homepage": "http://visavi.net",
+            "keywords": [
+                "clean",
+                "composer",
+                "vendor"
+            ],
+            "time": "2019-12-08T16:59:14+00:00"
         }
     ],
     "packages-dev": [],

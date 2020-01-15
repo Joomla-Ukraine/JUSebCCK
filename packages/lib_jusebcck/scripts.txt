@@ -1,3 +1,7 @@
 ﻿composer install --optimize-autoloader --prefer-dist --no-dev 
 
-composer update --optimize-autoloader --prefer-dist --no-dev 
+composer update --optimize-autoloader --prefer-dist --no-dev
+./vendor/bin/cleanup
+
+
+https://github.com/visavi/cleanup
