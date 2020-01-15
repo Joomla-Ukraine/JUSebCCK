@@ -9,9 +9,31 @@
 
 namespace JUSebCCK\Utils;
 
-
 class Folder
 {
+	/**
+	 * @param     $dir
+	 * @param int $mode
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0
+	 */
+	public static function create($dir, $mode = 0777)
+	{
+		if(@mkdir($dir, $mode) || is_dir($dir))
+		{
+			return true;
+		}
+
+		if(!self::create(dirname($dir)))
+		{
+			return false;
+		}
+
+		return @mkdir($dir, $mode);
+	}
+
 	/**
 	 * @param      $dir
 	 * @param bool $deleteRootToo
