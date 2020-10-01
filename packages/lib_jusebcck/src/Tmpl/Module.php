@@ -18,51 +18,76 @@ use Joomla\CMS\Helper\ModuleHelper;
 class Module
 {
 	/**
-	 * @param      $modpos
-	 * @param null $class_head
-	 * @param null $links
-	 * @param null $class
-	 * @param null $title
+	 * @param       $modpos
+	 * @param array $data
 	 *
 	 * @return string
 	 *
 	 * @since 1.0
 	 */
-	public static function render($modpos, $class_head = null, $links = null, $class = null, $title = null)
+	public static function render($modpos, array $data = [])
 	{
 		$contents = '';
-		$renderer = Factory::getDocument()->loadRenderer('module');
 
 		if($modules = ModuleHelper::getModules($modpos))
 		{
+			$renderer = Factory::getDocument()->loadRenderer('module');
+
 			foreach($modules as $mod)
 			{
-				if($title)
+				$params = json_decode($mod->params);
+
+				if($data[ 'title' ])
 				{
-					$mod->title = $title;
+					$mod->title = $data[ 'title' ];
 				}
 
-				if($mod->showtitle)
+				$header_class = $params->header_class;
+				if($data[ 'header_class' ])
 				{
-					if($links)
+					$header_class = $data[ 'header_class' ];
+				}
+
+				$header_tag = $params->header_tag;
+				if($data[ 'header_tag' ])
+				{
+					$header_tag = $data[ 'header_tag' ];
+				}
+
+				$module_tag = $params->module_tag;
+				if($data[ 'module_tag' ])
+				{
+					$module_tag = $data[ 'module_tag' ];
+				}
+
+				$showtitle = $mod->showtitle;
+				if($data[ 'showtitle' ] === false)
+				{
+					$showtitle = 0;
+				}
+
+				if($showtitle == 1)
+				{
+					$contents .= '<' . $header_tag . ($header_class ? ' class="' . $header_class . '"' : '') . '>' . $mod->title . '</' . $header_tag . '>';
+					if($data[ 'link' ])
 					{
-						$contents .= '<h2' . ($class_head ? ' class="' . $class_head . '"' : '') . '><a href="' . $links . '">' . $mod->title . '</a></h2>';
-					}
-					else
-					{
-						$contents .= '<h2' . ($class_head ? ' class="' . $class_head . '"' : '') . '>' . $mod->title . '</h2>';
+						$contents .= '<' . $header_tag . ($header_class ? ' class="' . $header_class . '"' : '') . '><a href="' . $data[ 'link' ] . '">' . $mod->title . '</a></' . $header_tag . '>';
 					}
 				}
 
-				if($class)
+				if($data[ 'module_class' ])
 				{
-					$contents .= '<div class="' . $class . '">';
-					$contents .= $renderer->render($mod);
-					$contents .= '</div>';
+					$contents .= '<' . $module_tag . ' class="' . $data[ 'module_class' ] . '">';
+					$contents .= $renderer->render($mod, [
+						'style' => ($data[ 'style' ] ? $data[ 'style' ] : 'raw')
+					]);
+					$contents .= '</' . $module_tag . '>';
 				}
 				else
 				{
-					$contents .= $renderer->render($mod);
+					$contents .= $renderer->render($mod, [
+						'style' => ($data[ 'style' ] ? $data[ 'style' ] : 'raw')
+					]);
 				}
 			}
 		}

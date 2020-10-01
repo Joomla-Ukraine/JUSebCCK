@@ -50,6 +50,7 @@
     "ext-mbstring": "*",
     "emuravjev/mdash": "^0.2.1",
     "opencage/geocode": "^2.1",
-    "visavi/cleanup": "^1.5"
+    "visavi/cleanup": "^1.5",
+    "wapmorgan/morphos": "^3.2"
   }
 }

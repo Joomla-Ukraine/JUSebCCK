@@ -77,7 +77,6 @@ class Menu
 			$query->where($db->quoteName('type') . ' = ' . $db->quote($data[ 'type' ]));
 			$query->where($db->quoteName('parent_id') . ' = ' . $db->quote($data[ 'parent_id' ]));
 			$query->where($db->quoteName('home') . ' = ' . $db->quote($data[ 'home' ]));
-
 			$db->setQuery($query);
 
 			if($result = $db->loadResult())

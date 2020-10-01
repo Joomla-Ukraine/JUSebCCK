@@ -1,0 +1,154 @@
+#!/usr/bin/env php
+<?php
+use morphos\Russian\NounDeclension;
+use morphos\Russian\GeographicalNamesInflection;
+use morphos\Russian\NounPluralization;
+use morphos\S;
+
+$paths = [
+    // as a root package or phar
+    __DIR__.'/../vendor/autoload.php',
+    // as a dependency from bin
+    __DIR__.'/../autoload.php',
+    // as a dependency from package folder
+    __DIR__.'/../../../autoload.php',
+    ];
+function init_composer(array $paths) {
+    foreach ($paths as $path) {
+        if (file_exists($path)) {
+            require_once $path;
+            return true;
+        }
+    }
+    return false;
+}
+if (!init_composer($paths)) die('Run `composer install` firstly.'.PHP_EOL);
+
+function dump() {
+    $dumper = function ($value, $level = 0, $verbose = true) use (&$dumper) {
+        $output = null;
+        if (is_array($value)) {
+            $output .= str_repeat('  ', $level).' array('.count($value).'):'.PHP_EOL;
+            $i = 0;
+            foreach ($value as $key => $element) {
+                if ($key === $i++) $output .= str_repeat('  ', $level + 1) . $dumper($element, $level, false).PHP_EOL;
+                else $output .= str_repeat('  ', $level + 1).'['.$dumper($key, $level, false).'] => '.$dumper($element, $level, false).PHP_EOL;
+            }
+        } else if (is_string($value)) {
+            $output .= $verbose ? 'string('.strlen($value).'): "'.$value.'"'.PHP_EOL: '\''.$value.'\'';
+        }
+        return $output;
+    };
+
+    $output = null;
+    foreach (func_get_args() as $var) {
+        $output .= $dumper($var);
+    }
+    return $output;
+}
+
+class ConsoleLine {
+    protected $readlineSupport;
+
+    public function __construct() {
+        $this->readlineSupport = /*strncasecmp(PHP_OS, 'win', 3) !== 0 && */extension_loaded('readline');
+    }
+
+    public function addLineForEmulation($line) {
+        $this->emulation[] = $line;
+    }
+
+    public function addToHistory($command) {
+        if ($this->readlineSupport)
+            readline_add_history($command);
+    }
+
+    public function readLine($prompt) {
+        if (!empty($this->emulation))
+            return array_shift($this->emulation);
+
+        if ($this->readlineSupport)
+            return trim(readline($prompt));
+        else {
+            fwrite(STDOUT, $prompt);
+            return fgets(STDIN);
+        }
+    }
+}
+
+$line = new ConsoleLine();
+
+$language = 'ru';
+for ($i = 1; $i < $argc; $i++) {
+    if ($i == 1 && in_array($argv[$i], ['ru', 'en'])) {
+        $language = $argv[$i];
+        continue;
+    }
+    $line->addLineForEmulation(trim($argv[$i]));
+}
+
+fwrite(STDOUT, 'Напишите слово / комбинацию Фамилия Имя [Отчество] для проверки склонения или ? для полной справки'.PHP_EOL);
+
+while (true) {
+    $word = $line->readLine('> ');
+    if (empty($word)) {
+        continue;
+    }
+
+    if ($word === '?') {
+        fwrite(STDOUT, 'Возможные входные параметры:
+- слово
+Должно быть существительным. Склоняет слово во всех падежах в единственном и множественном числах.
+- Слово
+Склонение географического названия.
+- Фамилия Имя
+- Фамилия Имя Отчество
+Порядок следования (сначала всегда идёт Фамилия) соблюдать обязательно! Склоняет имя во всех падежах.
+- 123
+Любое число. Генерирует порядковое и количественное числительные во всех падежах.
+- 123 знак
+Любое число и существительное. Генерирует количественное числительное с существительным в правильной форме во всех падежах.
+');
+        continue;
+    }
+    $line->addToHistory($word);
+
+    // генерация числительных
+    if (is_numeric($word)) {
+
+        if ($language == 'ru') {
+            $cardinal_numerals = morphos\Russian\CardinalNumeralGenerator::getCases($word);
+            $ordinal_numerals = morphos\Russian\OrdinalNumeralGenerator::getCases($word);
+        } else if ($language == 'en') {
+            $cardinal_numerals = morphos\English\CardinalNumeralGenerator::generate($word);
+            $ordinal_numerals = morphos\English\OrdinalNumeralGenerator::generate($word).' ('.morphos\English\OrdinalNumeralGenerator::generate($word, true).')';
+        }
+
+        fwrite(STDOUT, 'Числительное количественное: '.dump($cardinal_numerals));
+        fwrite(STDOUT, 'Числительное порядковое: '.dump($ordinal_numerals));
+    } else if (substr_count($word, ' ') === 1 && (list($number, $noun) = explode(' ', $word)) && is_numeric($number)) {
+        fwrite(STDOUT, 'Число с существительным: '.dump(morphos\Russian\pluralize($number, $noun)));
+    } else if (strpos($word, ' ') === false) {
+        // только одно слово
+        $first_char = S::slice($word, 0, 1);
+        // географическое название
+        if ($first_char == S::upper($first_char)) {
+            $names = GeographicalNamesInflection::getCases($word);
+            fwrite(STDOUT, 'Географическое название: '.dump($names));
+        }
+        // существительное
+        else {
+            $cases = NounDeclension::getCases($word);
+            $plural_cases = NounPluralization::getCases($word);
+            fwrite(STDOUT, 'Существительное в единственном числе: '.dump($cases));
+            fwrite(STDOUT, 'Существительное во множественном числе: '.dump($plural_cases));
+        }
+    }
+    // Фамилия Имя
+    else {
+        $gender = morphos\Russian\detectGender($word);
+        $cases = morphos\Russian\inflectName($word);
+        fwrite(STDOUT, 'Предполагаемый пол: '.$gender.PHP_EOL);
+        fwrite(STDOUT, 'Склонение: '.dump($cases));
+    }
+}

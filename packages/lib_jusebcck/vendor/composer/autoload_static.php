@@ -4,9 +4,18 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8afeae53c85de1b91834fe6860e1856a
+class ComposerStaticInit3b18ee2abf29105dfbb0f4741b3a1a75
 {
+    public static $files = array (
+        '271cb6f21c9ae69ccbad5cc1b8d6707c' => __DIR__ . '/..' . '/wapmorgan/morphos/src/English/functions.php',
+        '34d31f2fd925dfe2696a521f5ec12db2' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/functions.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
+        'm' => 
+        array (
+            'morphos\\' => 8,
+        ),
         'O' => 
         array (
             'OpenCage\\Geocoder\\' => 18,
@@ -22,6 +31,10 @@ class ComposerStaticInit8afeae53c85de1b91834fe6860e1856a
     );
 
     public static $prefixDirsPsr4 = array (
+        'morphos\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wapmorgan/morphos/src',
+        ),
         'OpenCage\\Geocoder\\' => 
         array (
             0 => __DIR__ . '/..' . '/opencage/geocode/src',
@@ -60,6 +73,7 @@ class ComposerStaticInit8afeae53c85de1b91834fe6860e1856a
         'JUSebCCK\\Events\\BeforeStore' => __DIR__ . '/../..' . '/src/Events/BeforeStore.php',
         'JUSebCCK\\Joomla\\Article' => __DIR__ . '/../..' . '/src/Joomla/Article.php',
         'JUSebCCK\\Joomla\\Cache' => __DIR__ . '/../..' . '/src/Joomla/Cache.php',
+        'JUSebCCK\\Joomla\\DB' => __DIR__ . '/../..' . '/src/Joomla/DB.php',
         'JUSebCCK\\Joomla\\Menu' => __DIR__ . '/../..' . '/src/Joomla/Menu.php',
         'JUSebCCK\\Joomla\\User' => __DIR__ . '/../..' . '/src/Joomla/User.php',
         'JUSebCCK\\Tmpl\\Module' => __DIR__ . '/../..' . '/src/Tmpl/Module.php',
@@ -71,17 +85,49 @@ class ComposerStaticInit8afeae53c85de1b91834fe6860e1856a
         'JUSebCCK\\Utils\\HTML' => __DIR__ . '/../..' . '/src/Utils/HTML.php',
         'JUSebCCK\\Utils\\HTTP' => __DIR__ . '/../..' . '/src/Utils/HTTP.php',
         'JUSebCCK\\Utils\\Image' => __DIR__ . '/../..' . '/src/Utils/Image.php',
+        'JUSebCCK\\Utils\\Schema' => __DIR__ . '/../..' . '/src/Utils/Schema.php',
         'JUSebCCK\\Utils\\Video' => __DIR__ . '/../..' . '/src/Utils/Video.php',
         'OpenCage\\Geocoder\\AbstractGeocoder' => __DIR__ . '/..' . '/opencage/geocode/src/AbstractGeocoder.php',
         'OpenCage\\Geocoder\\Geocoder' => __DIR__ . '/..' . '/opencage/geocode/src/Geocoder.php',
+        'morphos\\BaseInflection' => __DIR__ . '/..' . '/wapmorgan/morphos/src/BaseInflection.php',
+        'morphos\\BasePluralization' => __DIR__ . '/..' . '/wapmorgan/morphos/src/BasePluralization.php',
+        'morphos\\Cases' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Cases.php',
+        'morphos\\CasesHelper' => __DIR__ . '/..' . '/wapmorgan/morphos/src/CasesHelper.php',
+        'morphos\\CurrenciesHelper' => __DIR__ . '/..' . '/wapmorgan/morphos/src/CurrenciesHelper.php',
+        'morphos\\Currency' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Currency.php',
+        'morphos\\English\\CardinalNumeralGenerator' => __DIR__ . '/..' . '/wapmorgan/morphos/src/English/CardinalNumeralGenerator.php',
+        'morphos\\English\\NounPluralization' => __DIR__ . '/..' . '/wapmorgan/morphos/src/English/NounPluralization.php',
+        'morphos\\English\\OrdinalNumeralGenerator' => __DIR__ . '/..' . '/wapmorgan/morphos/src/English/OrdinalNumeralGenerator.php',
+        'morphos\\English\\TimeSpeller' => __DIR__ . '/..' . '/wapmorgan/morphos/src/English/TimeSpeller.php',
+        'morphos\\Gender' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Gender.php',
+        'morphos\\MoneySpeller' => __DIR__ . '/..' . '/wapmorgan/morphos/src/MoneySpeller.php',
+        'morphos\\NamesInflection' => __DIR__ . '/..' . '/wapmorgan/morphos/src/NamesInflection.php',
+        'morphos\\NumeralGenerator' => __DIR__ . '/..' . '/wapmorgan/morphos/src/NumeralGenerator.php',
+        'morphos\\Russian\\AdjectiveDeclension' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/AdjectiveDeclension.php',
+        'morphos\\Russian\\AdjectivePluralization' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/AdjectivePluralization.php',
+        'morphos\\Russian\\CardinalNumeralGenerator' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/CardinalNumeralGenerator.php',
+        'morphos\\Russian\\Cases' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/Cases.php',
+        'morphos\\Russian\\CasesHelper' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/CasesHelper.php',
+        'morphos\\Russian\\FirstNamesInflection' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/FirstNamesInflection.php',
+        'morphos\\Russian\\GeographicalNamesInflection' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/GeographicalNamesInflection.php',
+        'morphos\\Russian\\LastNamesInflection' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/LastNamesInflection.php',
+        'morphos\\Russian\\MiddleNamesInflection' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/MiddleNamesInflection.php',
+        'morphos\\Russian\\MoneySpeller' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/MoneySpeller.php',
+        'morphos\\Russian\\NounDeclension' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/NounDeclension.php',
+        'morphos\\Russian\\NounPluralization' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/NounPluralization.php',
+        'morphos\\Russian\\OrdinalNumeralGenerator' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/OrdinalNumeralGenerator.php',
+        'morphos\\Russian\\RussianLanguage' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/RussianLanguage.php',
+        'morphos\\Russian\\TimeSpeller' => __DIR__ . '/..' . '/wapmorgan/morphos/src/Russian/TimeSpeller.php',
+        'morphos\\S' => __DIR__ . '/..' . '/wapmorgan/morphos/src/S.php',
+        'morphos\\TimeSpeller' => __DIR__ . '/..' . '/wapmorgan/morphos/src/TimeSpeller.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit8afeae53c85de1b91834fe6860e1856a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit8afeae53c85de1b91834fe6860e1856a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit8afeae53c85de1b91834fe6860e1856a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit3b18ee2abf29105dfbb0f4741b3a1a75::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit3b18ee2abf29105dfbb0f4741b3a1a75::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit3b18ee2abf29105dfbb0f4741b3a1a75::$classMap;
 
         }, null, ClassLoader::class);
     }

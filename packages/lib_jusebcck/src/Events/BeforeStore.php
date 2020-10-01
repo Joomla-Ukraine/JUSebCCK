@@ -1,13 +1,13 @@
 <?php
 /**
- * @package        JUSebCCK\Events
+ * @since          1.0
  * @subpackage     Class
  *
  * @author         Denys D. Nosov (denys@joomla-ua.org)
  * @copyright (C)  2019-2020 by Denys D. Nosov (https://joomla-ua.org)
  * @license        GNU General Public License version 2 or later
  *
- * @since          1.0
+ * @package        JUSebCCK\Events
  */
 
 namespace JUSebCCK\Events;
@@ -34,6 +34,24 @@ class BeforeStore
 	public static function typo($config, $fields, $field, $tags = 1)
 	{
 		$result = HTML::typo($fields[ $field ]->value, $tags);
+
+		return Data::bind($result, $field, $config, $fields);
+	}
+
+	/**
+	 * @param     $config
+	 * @param     $fields
+	 * @param     $field
+	 * @param     $class
+	 * @param int $clean
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0
+	 */
+	public static function table($config, $fields, $field, $class, $clean = 1)
+	{
+		$result = HTML::table($fields[ $field ]->value, $class, $clean);
 
 		return Data::bind($result, $field, $config, $fields);
 	}
@@ -135,9 +153,7 @@ class BeforeStore
 	 */
 	public static function checkVideo($config, $fields, $check_video, $video_source)
 	{
-		$check = Video::check($fields[ $video_source ]->value);
-
-		Data::bind($check, $check_video, $config, $fields);
+		Video::checkVideo($config, $fields, $check_video, $video_source);
 
 		return true;
 	}
@@ -153,9 +169,7 @@ class BeforeStore
 	 */
 	public static function checkGallery($config, $fields, $field)
 	{
-		$check = Image::check($fields[ $field ]->value);
-
-		Data::bind($check, $field, $config, $fields);
+		Image::checkGallery($config, $fields, $field);
 
 		return true;
 	}
@@ -172,16 +186,9 @@ class BeforeStore
 	 */
 	public static function galleryImage($config, $fields, $field_img, $field_folder)
 	{
-		if($fields[ $field_img ]->value == '')
-		{
-			$image = Image::gallery($fields[ $field_img ]->value, $fields[ $field_folder ]->value);
+		Image::galleryImage($config, $fields, $field_img, $field_folder);
 
-			Data::bind($image[ 0 ], $field_img, $config, $fields);
-
-			return true;
-		}
-
-		return false;
+		return true;
 	}
 
 	/**
@@ -195,16 +202,9 @@ class BeforeStore
 	 */
 	public static function YouTubeLink($config, $fields, $field)
 	{
-		if($url = $fields[ $field ]->value)
-		{
-			$url = Video::link($url);
+		Video::YouTubeLink($config, $fields, $field);
 
-			Data::bind($url, $field, $config, $fields);
-
-			return true;
-		}
-
-		return false;
+		return true;
 	}
 
 	/**
@@ -220,20 +220,9 @@ class BeforeStore
 	 */
 	public static function YouTubeFixLink($config, $fields, $field)
 	{
-		if($url = $fields[ $field ]->value)
-		{
-			$url = preg_replace("/http(s)?:\/\/youtu\.be\/([^\40\t\r\n\<]+)/i", 'https://www.youtube.com/watch?v=$2', $url);
-			$url = preg_replace("/http(s)?:\/\/(w{3}\.)?youtube\.com\/watch\/?\?v=([^\40\t\r\n\<]+)/i", 'https://www.youtube.com/watch?v=$3', $url);
+		Video::YouTubeFixLink($config, $fields, $field);
 
-			parse_str(parse_url($url, PHP_URL_QUERY), $youtube_array);
-			$url = 'https://www.youtube.com/watch?v=' . $youtube_array[ 'v' ];
-
-			Data::bind($url, $field, $config, $fields);
-
-			return true;
-		}
-
-		return false;
+		return true;
 	}
 
 	/**
@@ -248,9 +237,25 @@ class BeforeStore
 	 */
 	public static function YouTubeCover($config, $fields, $field_img, $youtube)
 	{
-		$youtube_img = Video::video($youtube);
+		Video::YouTubeCover($config, $fields, $field_img, $youtube);
 
-		Data::bind($youtube_img, $field_img, $config, $fields);
+		return true;
+	}
+
+	/**
+	 * @param $config
+	 * @param $fields
+	 * @param $field_img
+	 * @param $youtube
+	 * @param $path
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0
+	 */
+	public static function YouTubeSaveCover($config, $fields, $field_img, $youtube, $path)
+	{
+		Video::YouTubeSaveCover($config, $fields, $field_img, $youtube, $path);
 
 		return true;
 	}

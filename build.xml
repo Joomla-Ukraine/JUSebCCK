@@ -1,8 +1,8 @@
 <project name="jusebcck" default="dist" basedir=".">
 
-    <property name="VERSION" value="0.1.0"/>
+    <property name="VERSION" value="0.3.0"/>
 
-    <property name="JOOMLA" value="3.9.1"/>
+    <property name="JOOMLA" value="3.9.21"/>
     <property name="MIN_JOOMLA_VERSION" value="3.8"/>
 
     <tstamp>

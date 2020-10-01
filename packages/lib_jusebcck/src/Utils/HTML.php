@@ -1,10 +1,13 @@
 <?php
 /**
- * @package     JUSebCCK\Utils
- * @subpackage
+ * @since          1.0
+ * @subpackage     Class
  *
- * @copyright   A copyright
- * @license     A "Slug" license name e.g. GPL2
+ * @author         Denys D. Nosov (denys@joomla-ua.org)
+ * @copyright (C)  2019-2020 by Denys D. Nosov (https://joomla-ua.org)
+ * @license        GNU General Public License version 2 or later
+ *
+ * @package        JUSebCCK\Utils
  */
 
 namespace JUSebCCK\Utils;
@@ -31,11 +34,20 @@ class HTML
 		$typograf = new Typograph();
 		$typograf->set_text($html);
 		$typograf->setup([
-			'Text.paragraphs'                  => 'off',
-			'Text.breakline'                   => 'off',
-			'OptAlign.all'                     => 'off',
-			'Nobr.spaces_nobr_in_surname_abbr' => 'off',
-			'Etc.split_number_to_triads'       => 'off'
+			'Text.paragraphs'                   => 'off',
+			'Text.breakline'                    => 'off',
+			'OptAlign.all'                      => 'off',
+			'Nobr.spaces_nobr_in_surname_abbr'  => 'off',
+			'Nobr.nbsp_in_the_end'              => 'off',
+			'Nobr.phone_builder'                => 'off',
+			'Nobr.phone_builder_v2'             => 'off',
+			'Nobr.ip_address'                   => 'off',
+			'Nobr.dots_for_surname_abbr'        => 'off',
+			'Nobr.hyphen_nowrap_in_small_words' => 'off',
+			'Abbr.nobr_abbreviation'            => 'off',
+			'Abbr.nobr_acronym'                 => 'off',
+			'Etc.unicode_convert'               => 'off',
+			'Etc.split_number_to_triads'        => 'off'
 		]);
 
 		$result = $typograf->apply();
@@ -58,6 +70,54 @@ class HTML
 		}
 
 		return $result;
+	}
+
+	/**
+	 * @param     $html
+	 * @param     $class
+	 * @param int $clean
+	 *
+	 * @return mixed
+	 *
+	 * @since 1.0
+	 */
+	public static function table($html, $class, $clean = 1)
+	{
+		if($clean)
+		{
+			$html = preg_replace('#<table.*?>#is', '<table>', $html);
+		}
+
+		return str_replace('<table', '<table class="' . $class . '"', $html);
+	}
+
+	/**
+	 * @param $html
+	 * @param $count
+	 *
+	 * @return object
+	 *
+	 * @since 1.0
+	 */
+	public static function breakdown($html, $count = 100)
+	{
+		$intro = '';
+		if(preg_match('#^.{' . $count . '}.*?[.!?]#is', $html, $matches))
+		{
+			$intro = $matches[ 0 ];
+		}
+
+		$full = str_replace([
+			strip_tags($intro),
+			$intro
+		], '', $html);
+
+		$full = str_replace('</p>', '', $full);
+
+		return (object) [
+			'intro' => $intro,
+			'full'  => $full
+		];
 	}
 
 	/**

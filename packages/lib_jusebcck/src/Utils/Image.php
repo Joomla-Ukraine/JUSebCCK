@@ -63,4 +63,46 @@ class Image
 
 		return false;
 	}
+
+	/**
+	 * @param $config
+	 * @param $fields
+	 * @param $field_img
+	 * @param $field_folder
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0
+	 */
+	public static function galleryImage($config, $fields, $field_img, $field_folder)
+	{
+		if($fields[ $field_img ]->value == '')
+		{
+			$image = self::gallery($fields[ $field_img ]->value, $fields[ $field_folder ]->value);
+
+			Data::bind($image[ 0 ], $field_img, $config, $fields);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param $config
+	 * @param $fields
+	 * @param $field
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0
+	 */
+	public static function checkGallery($config, $fields, $field)
+	{
+		$check = self::check($fields[ $field ]->value);
+
+		Data::bind($check, $field, $config, $fields);
+
+		return true;
+	}
 }

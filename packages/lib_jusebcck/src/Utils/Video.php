@@ -167,4 +167,116 @@ class Video
 
 		return true;
 	}
+
+	/**
+	 * @param $config
+	 * @param $fields
+	 * @param $check_video
+	 * @param $video_source
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0
+	 */
+	public static function checkVideo($config, $fields, $check_video, $video_source)
+	{
+		$check = self::check($fields[ $video_source ]->value);
+
+		Data::bind($check, $check_video, $config, $fields);
+
+		return true;
+	}
+
+	/**
+	 * @param $config
+	 * @param $fields
+	 * @param $field
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0
+	 */
+	public static function YouTubeLink($config, $fields, $field)
+	{
+		if($url = $fields[ $field ]->value)
+		{
+			$url = self::link($url);
+
+			Data::bind($url, $field, $config, $fields);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param $config
+	 * @param $fields
+	 * @param $field
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0
+	 */
+	public static function YouTubeFixLink($config, $fields, $field)
+	{
+		if($url = $fields[ $field ]->value)
+		{
+			$url = preg_replace("/http(s)?:\/\/youtu\.be\/([^\40\t\r\n\<]+)/i", 'https://www.youtube.com/watch?v=$2', $url);
+			$url = preg_replace("/http(s)?:\/\/(w{3}\.)?youtube\.com\/watch\/?\?v=([^\40\t\r\n\<]+)/i", 'https://www.youtube.com/watch?v=$3', $url);
+
+			parse_str(parse_url($url, PHP_URL_QUERY), $youtube_array);
+			$url = 'https://www.youtube.com/watch?v=' . $youtube_array[ 'v' ];
+
+			Data::bind($url, $field, $config, $fields);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * @param $config
+	 * @param $fields
+	 * @param $field_img
+	 * @param $youtube
+	 * @param $path
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0
+	 */
+	public static function YouTubeSaveCover($config, $fields, $field_img, $youtube, $path)
+	{
+		$youtube_img = self::video($youtube);
+		$hash        = hash('crc32b', $youtube_img);
+		$img_path    = $path . '/' . $hash . '.jpg';
+
+		Folder::create(JPATH_BASE . '/' . $path);
+		File::save($youtube_img, $img_path);
+		Data::bind($img_path, $field_img, $config, $fields);
+
+		return true;
+	}
+
+	/**
+	 * @param $config
+	 * @param $fields
+	 * @param $field_img
+	 * @param $youtube
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0
+	 */
+	public static function YouTubeCover($config, $fields, $field_img, $youtube)
+	{
+		$youtube_img = self::video($youtube);
+
+		Data::bind($youtube_img, $field_img, $config, $fields);
+
+		return true;
+	}
 }

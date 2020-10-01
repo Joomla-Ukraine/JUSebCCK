@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'morphos\\' => array($vendorDir . '/wapmorgan/morphos/src'),
     'OpenCage\\Geocoder\\' => array($vendorDir . '/opencage/geocode/src'),
     'JUSebCCK\\' => array($baseDir . '/src'),
     'Emuravjev\\Mdash\\' => array($vendorDir . '/emuravjev/mdash/src'),

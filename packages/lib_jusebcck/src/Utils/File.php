@@ -1,10 +1,13 @@
 <?php
 /**
- * @package     JUSebCCK\Utils
- * @subpackage
+ * @package        JUSebCCK\Utils
+ * @subpackage     Class
  *
- * @copyright   A copyright
- * @license     A "Slug" license name e.g. GPL2
+ * @author         Denys D. Nosov (denys@joomla-ua.org)
+ * @copyright (C)  2019-2020 by Denys D. Nosov (https://joomla-ua.org)
+ * @license        GNU General Public License version 2 or later
+ *
+ * @since          1.0
  */
 
 namespace JUSebCCK\Utils;

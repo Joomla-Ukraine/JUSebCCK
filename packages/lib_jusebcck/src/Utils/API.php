@@ -54,7 +54,7 @@ class API
 			return $url;
 		}
 
-		return false;
+		return $url;
 	}
 
 	/**
