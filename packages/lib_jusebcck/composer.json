@@ -49,6 +49,7 @@
     "ext-json": "*",
     "ext-mbstring": "*",
     "emuravjev/mdash": "^0.2.1",
+    "stichoza/google-translate-php": "^4.1",
     "opencage/geocode": "^2.1",
     "visavi/cleanup": "^1.5",
     "wapmorgan/morphos": "^3.2"
