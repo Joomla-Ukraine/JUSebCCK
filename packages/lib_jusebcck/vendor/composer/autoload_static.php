@@ -93,6 +93,7 @@ class ComposerStaticInit3b18ee2abf29105dfbb0f4741b3a1a75
     );
 
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Emuravjev\\Mdash\\Lib' => __DIR__ . '/..' . '/emuravjev/mdash/src/Lib.php',
         'Emuravjev\\Mdash\\Tret\\Abbr' => __DIR__ . '/..' . '/emuravjev/mdash/src/Tret/Abbr.php',
         'Emuravjev\\Mdash\\Tret\\Base' => __DIR__ . '/..' . '/emuravjev/mdash/src/Tret/Base.php',

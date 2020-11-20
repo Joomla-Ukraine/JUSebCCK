@@ -18,9 +18,28 @@ class HTML
 {
 	/**
 	 * @param     $html
+	 * @param     $class
+	 * @param int $clean
+	 *
+	 * @return mixed
+	 *
+	 * @since 1.0
+	 */
+	public static function table($html, $class, $clean = 1)
+	{
+		if($clean)
+		{
+			$html = preg_replace('#<table.*?>#is', '<table>', $html);
+		}
+
+		return str_replace('<table', '<table class="' . $class . '"', $html);
+	}
+
+	/**
+	 * @param     $html
 	 * @param int $type
 	 *
-	 * @return string|string[]|null
+	 * @return mixed|string|string[]|null
 	 *
 	 * @since 1.0
 	 */
@@ -74,26 +93,7 @@ class HTML
 
 	/**
 	 * @param     $html
-	 * @param     $class
-	 * @param int $clean
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.0
-	 */
-	public static function table($html, $class, $clean = 1)
-	{
-		if($clean)
-		{
-			$html = preg_replace('#<table.*?>#is', '<table>', $html);
-		}
-
-		return str_replace('<table', '<table class="' . $class . '"', $html);
-	}
-
-	/**
-	 * @param $html
-	 * @param $count
+	 * @param int $count
 	 *
 	 * @return object
 	 *
@@ -107,12 +107,7 @@ class HTML
 			$intro = $matches[ 0 ];
 		}
 
-		$full = str_replace([
-			strip_tags($intro),
-			$intro
-		], '', $html);
-
-		$full = str_replace('</p>', '', $full);
+		$full = str_replace([ strip_tags($intro), $intro, '</p>' ], '', $html);
 
 		return (object) [
 			'intro' => $intro,
@@ -123,7 +118,7 @@ class HTML
 	/**
 	 * @param $html
 	 *
-	 * @return string|string[]
+	 * @return mixed
 	 *
 	 * @since 1.0
 	 */

@@ -33,7 +33,7 @@ class API
 	 * @param       $url
 	 * @param array $data
 	 *
-	 * @return bool|string
+	 * @return string
 	 *
 	 * @since 1.0
 	 */

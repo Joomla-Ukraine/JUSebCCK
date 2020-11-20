@@ -19,7 +19,7 @@ class Location
 	/**
 	 * @param array $data
 	 *
-	 * @return bool|object
+	 * @return false|object
 	 *
 	 * @since 1.0
 	 */
@@ -42,7 +42,7 @@ class Location
 	/**
 	 * @param array $data
 	 *
-	 * @return bool|object
+	 * @return false|object
 	 *
 	 * @since 1.0
 	 */
@@ -65,7 +65,7 @@ class Location
 	/**
 	 * @param array $data
 	 *
-	 * @return bool|object
+	 * @return false|object
 	 *
 	 * @since 1.0
 	 */

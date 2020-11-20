@@ -1,13 +1,13 @@
 <?php
 /**
- * @package        JUSebCCK\Joomla
+ * @since          1.0
  * @subpackage     Class
  *
  * @author         Denys D. Nosov (denys@joomla-ua.org)
  * @copyright (C)  2019-2020 by Denys D. Nosov (https://joomla-ua.org)
  * @license        GNU General Public License version 2 or later
  *
- * @since          1.0
+ * @package        JUSebCCK\Joomla
  */
 
 namespace JUSebCCK\Joomla;
@@ -25,11 +25,11 @@ class DB
 	 *
 	 * @param string $operator
 	 *
-	 * @return object
+	 * @return false|object
 	 *
 	 * @since 1.0
 	 */
-	public static function selectDB($table, $type = 1, array $select = [ '*' ], array $where = [], $operator = '=')
+	public static function selectDB($table, int $type = 1, array $select = [ '*' ], array $where = [], string $operator = '=')
 	{
 		$db    = Factory::getDbo();
 		$query = $db->getQuery(true);
@@ -51,17 +51,17 @@ class DB
 		$db->setQuery($query);
 		$db->execute();
 
-		switch($type)
+		if($type == 2)
 		{
-			case 2:
-				return (object) $db->loadObject();
-				break;
-
-			case 1:
-			default:
-				return (object) $db->loadObjectList();
-				break;
+			return (object) $db->loadObject();
 		}
+
+		if($type == 1)
+		{
+			return (object) $db->loadObjectList();
+		}
+
+		return false;
 	}
 
 	/**
@@ -73,7 +73,7 @@ class DB
 	 *
 	 * @since 1.0
 	 */
-	public static function check($table, array $where = [], $operator = '=')
+	public static function check($table, array $where = [], $operator = '='): int
 	{
 		$db    = Factory::getDbo();
 		$query = $db->getQuery(true);

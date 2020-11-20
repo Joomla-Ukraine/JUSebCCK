@@ -1,13 +1,13 @@
 <?php
 /**
- * @since          1.0
+ * @package        JUSebCCK\Utils
  * @subpackage     Class
  *
  * @author         Denys D. Nosov (denys@joomla-ua.org)
  * @copyright (C)  2019-2020 by Denys D. Nosov (https://joomla-ua.org)
  * @license        GNU General Public License version 2 or later
  *
- * @package        JUSebCCK\Utils
+ * @since          1.0
  */
 
 namespace JUSebCCK\Utils;

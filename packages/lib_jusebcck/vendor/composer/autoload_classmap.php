@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Emuravjev\\Mdash\\Lib' => $vendorDir . '/emuravjev/mdash/src/Lib.php',
     'Emuravjev\\Mdash\\Tret\\Abbr' => $vendorDir . '/emuravjev/mdash/src/Tret/Abbr.php',
     'Emuravjev\\Mdash\\Tret\\Base' => $vendorDir . '/emuravjev/mdash/src/Tret/Base.php',

@@ -23,7 +23,6 @@ class Google
 	 *
 	 * @return string|null
 	 * @throws \ErrorException
-	 *
 	 * @since 1.0
 	 */
 	public static function get($from, $to, $text)

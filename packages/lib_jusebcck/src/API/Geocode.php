@@ -17,11 +17,9 @@ use OpenCage;
 class Geocode
 {
 	/**
-	 * @param        $address
-	 * @param string $api
-	 * @param array  $options
+	 * @param array $data
 	 *
-	 * @return mixed
+	 * @return array|false|mixed
 	 *
 	 * @throws \Exception
 	 * @since 1.0

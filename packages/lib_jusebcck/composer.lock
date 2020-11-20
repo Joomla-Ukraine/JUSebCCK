@@ -47,6 +47,10 @@
                 "русский",
                 "типограф"
             ],
+            "support": {
+                "issues": "https://github.com/vitalybaev/mdash-typograph-php/issues",
+                "source": "https://github.com/vitalybaev/mdash-typograph-php/tree/master"
+            },
             "time": "2017-01-13T05:02:06+00:00"
         },
         {
@@ -127,6 +131,10 @@
                 "rest",
                 "web service"
             ],
+            "support": {
+                "issues": "https://github.com/guzzle/guzzle/issues",
+                "source": "https://github.com/guzzle/guzzle/tree/7.2.0"
+            },
             "funding": [
                 {
                     "url": "https://github.com/GrahamCampbell",
@@ -196,6 +204,10 @@
             "keywords": [
                 "promise"
             ],
+            "support": {
+                "issues": "https://github.com/guzzle/promises/issues",
+                "source": "https://github.com/guzzle/promises/tree/1.4.0"
+            },
             "time": "2020-09-30T07:37:28+00:00"
         },
         {
@@ -267,6 +279,10 @@
                 "uri",
                 "url"
             ],
+            "support": {
+                "issues": "https://github.com/guzzle/psr7/issues",
+                "source": "https://github.com/guzzle/psr7/tree/1.7.0"
+            },
             "time": "2020-09-30T07:37:11+00:00"
         },
         {
@@ -314,6 +330,11 @@
                 "geocoding",
                 "opencagedata"
             ],
+            "support": {
+                "docs": "https://opencagedata.com/api",
+                "issues": "https://github.com/OpenCageData/php-opencage-geocode/issues",
+                "source": "https://github.com/OpenCageData/php-opencage-geocode"
+            },
             "time": "2019-05-09T22:40:38+00:00"
         },
         {
@@ -363,6 +384,9 @@
                 "psr",
                 "psr-18"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-client/tree/master"
+            },
             "time": "2020-06-29T06:28:15+00:00"
         },
         {
@@ -413,6 +437,9 @@
                 "request",
                 "response"
             ],
+            "support": {
+                "source": "https://github.com/php-fig/http-message/tree/master"
+            },
             "time": "2016-08-06T14:39:51+00:00"
         },
         {
@@ -453,6 +480,10 @@
                 }
             ],
             "description": "A polyfill for getallheaders.",
+            "support": {
+                "issues": "https://github.com/ralouphie/getallheaders/issues",
+                "source": "https://github.com/ralouphie/getallheaders/tree/develop"
+            },
             "time": "2019-03-08T08:55:37+00:00"
         },
         {
@@ -502,6 +533,10 @@
                 "translate",
                 "translator"
             ],
+            "support": {
+                "issues": "https://github.com/Stichoza/google-translate-php/issues",
+                "source": "https://github.com/Stichoza/google-translate-php/tree/v4.1.1"
+            },
             "time": "2020-09-10T13:53:57+00:00"
         },
         {
@@ -543,6 +578,10 @@
                 "composer",
                 "vendor"
             ],
+            "support": {
+                "issues": "https://github.com/visavi/cleanup/issues",
+                "source": "https://github.com/visavi/cleanup/tree/master"
+            },
             "time": "2019-12-08T16:59:14+00:00"
         },
         {
@@ -612,6 +651,10 @@
                 "spelling",
                 "time"
             ],
+            "support": {
+                "issues": "https://github.com/wapmorgan/Morphos/issues",
+                "source": "https://github.com/wapmorgan/Morphos/tree/3.2.22"
+            },
             "time": "2020-06-12T23:13:39+00:00"
         }
     ],
@@ -627,5 +670,5 @@
         "ext-mbstring": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

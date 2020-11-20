@@ -37,7 +37,7 @@ class Image
 	 * @param $html
 	 * @param $folder
 	 *
-	 * @return bool|string|string[]
+	 * @return false|mixed
 	 *
 	 * @since 1.0
 	 */

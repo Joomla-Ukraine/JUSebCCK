@@ -26,7 +26,7 @@ class User
 	/**
 	 * @param null $id
 	 *
-	 * @return int
+	 * @return int|null
 	 *
 	 * @since 1.0
 	 */
