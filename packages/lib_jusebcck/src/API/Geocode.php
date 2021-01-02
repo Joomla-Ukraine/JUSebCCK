@@ -19,7 +19,7 @@ class Geocode
 	/**
 	 * @param array $data
 	 *
-	 * @return array|false|mixed
+	 * @return mixed
 	 *
 	 * @throws \Exception
 	 * @since 1.0
