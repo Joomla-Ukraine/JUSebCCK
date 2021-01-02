@@ -4,7 +4,7 @@
  * @subpackage     Class
  *
  * @author         Denys D. Nosov (denys@joomla-ua.org)
- * @copyright (C)  2016-2019-2020 by Denys D. Nosov (https://joomla-ua.org)
+ * @copyright (C)  2019-2021 by Denys D. Nosov (https://joomla-ua.org)
  * @license        GNU General Public License version 2 or later
  *
  * @since          1.0
@@ -99,7 +99,7 @@ class JUSebCCKInstallerScript
 	 */
 	public function unlinkRecursive($dir, $deleteRootToo)
 	{
-		if( !$dh = @opendir($dir) )
+		if( !$dh = opendir($dir) )
 		{
 			return;
 		}
@@ -111,7 +111,7 @@ class JUSebCCKInstallerScript
 				continue;
 			}
 
-			if( !@unlink($dir . '/' . $obj) )
+			if( !unlink($dir . '/' . $obj) )
 			{
 				$this->unlinkRecursive($dir . '/' . $obj, true);
 			}
@@ -121,7 +121,7 @@ class JUSebCCKInstallerScript
 
 		if( $deleteRootToo )
 		{
-			@rmdir($dir);
+			rmdir($dir);
 		}
 	}
 }
