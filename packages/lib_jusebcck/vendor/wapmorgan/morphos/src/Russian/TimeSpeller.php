@@ -5,6 +5,9 @@ use InvalidArgumentException;
 
 class TimeSpeller extends \morphos\TimeSpeller
 {
+    /**
+     * @var string[]
+     */
     protected static $units = [
         self::YEAR => 'год',
         self::MONTH => 'месяц',
@@ -22,8 +25,8 @@ class TimeSpeller extends \morphos\TimeSpeller
     const JUST_NOW = 'только что';
 
     /**
-     * @param $count
-     * @param $unit
+     * @param int $count
+     * @param string $unit
      *
      * @return string
      * @throws \Exception
@@ -32,6 +35,12 @@ class TimeSpeller extends \morphos\TimeSpeller
     {
         if (!isset(static::$units[$unit])) {
             throw new InvalidArgumentException('Unknown time unit: '.$unit);
+        }
+
+        if ($count === 1 && in_array($unit, [self::SECOND, self::MINUTE], true)) {
+            if ($unit === self::SECOND)
+                return '1 секунду';
+            return '1 минуту';
         }
 
         return pluralize($count, static::$units[$unit]);

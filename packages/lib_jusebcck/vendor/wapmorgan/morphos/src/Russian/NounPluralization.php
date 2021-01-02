@@ -14,15 +14,24 @@ class NounPluralization extends \morphos\BasePluralization implements Cases
     const TWO_FOUR = 2;
     const FIVE_OTHER = 3;
 
+    /**
+     * @var string[][]
+     * @phpstan-var array<string, string[]>
+     */
     protected static $abnormalExceptions = [
         'человек' => ['люди', 'человек', 'людям', 'людей', 'людьми', 'людях'],
     ];
 
+    /** @var string[] */
     protected static $neuterExceptions = [
         'поле',
         'море',
     ];
 
+    /**
+     * @var string[]
+     * @phpstan-var array<string, string>
+     */
     protected static $genitiveExceptions = [
         'письмо' => 'писем',
         'пятно' => 'пятен',
@@ -35,29 +44,11 @@ class NounPluralization extends \morphos\BasePluralization implements Cases
         'год' => 'лет',
     ];
 
-    protected static $runawayVowelsExceptions = [
-        'писе*ц',
-        'песе*ц',
-        'глото*к',
-    ];
-
-    /**
-     * @return array|bool
-     */
-    protected static function getRunAwayVowelsList()
-    {
-        $runawayVowelsNormalized = [];
-        foreach (static::$runawayVowelsExceptions as $word) {
-            $runawayVowelsNormalized[str_replace('*', null, $word)] = S::indexOf($word, '*') - 1;
-        }
-        return $runawayVowelsNormalized;
-    }
-
     /**
      * Склонение существительного для сочетания с числом (кол-вом предметов).
      *
      * @param string|int $word        Название предмета
-     * @param int|string $count       Количество предметов
+     * @param int|float|string $count Количество предметов
      * @param bool       $animateness Признак одушевленности
      * @param string     $case        Род существительного
      *
@@ -104,7 +95,7 @@ class NounPluralization extends \morphos\BasePluralization implements Cases
     }
 
     /**
-     * @param $count
+     * @param int|float $count
      * @return int
      */
     public static function getNumeralForm($count)
@@ -124,8 +115,8 @@ class NounPluralization extends \morphos\BasePluralization implements Cases
     }
 
     /**
-     * @param $word
-     * @param $case
+     * @param string $word
+     * @param string $case
      * @param bool $animateness
      * @return string
      * @throws \Exception
@@ -138,9 +129,10 @@ class NounPluralization extends \morphos\BasePluralization implements Cases
     }
 
     /**
-     * @param $word
+     * @param string $word
      * @param bool $animateness
-     * @return array
+     * @return string[]
+     * @phpstan-return array<string, string>
      */
     public static function getCases($word, $animateness = false)
     {
@@ -175,20 +167,15 @@ class NounPluralization extends \morphos\BasePluralization implements Cases
 
     /**
      * Склонение обычных существительных.
-     * @param $word
-     * @param $animateness
-     * @return array
+     * @param string $word
+     * @param bool $animateness
+     * @return string[]
+     * @phpstan-return array<string, string>
      */
     protected static function declinateSubstative($word, $animateness)
     {
         $prefix = S::slice($word, 0, -1);
         $last = S::slice($word, -1);
-
-        $runaway_vowels_list = static::getRunAwayVowelsList();
-        if (isset($runaway_vowels_list[$word])) {
-            $vowel_offset = $runaway_vowels_list[$word];
-            $word = S::slice($word, 0, $vowel_offset) . S::slice($word, $vowel_offset + 1);
-        }
 
         if (($declension = NounDeclension::getDeclension($word)) == NounDeclension::SECOND_DECLENSION) {
             $soft_last = $last == 'й' || (in_array($last, ['ь', 'е', 'ё', 'ю', 'я'], true)
@@ -199,13 +186,13 @@ class NounPluralization extends \morphos\BasePluralization implements Cases
         } elseif ($declension == NounDeclension::FIRST_DECLENSION) {
             $soft_last = static::checkLastConsonantSoftness($word);
         } else {
-            $soft_last = in_array(S::slice($word, -2), ['чь', 'сь', 'ть', 'нь'], true);
+            $soft_last = in_array(S::slice($word, -2), ['чь', 'сь', 'ть', 'нь', 'дь'], true);
         }
 
         $forms = [];
 
         if (in_array($last, ['ч', 'г'], true)
-            || in_array(S::slice($word, -2), ['чь', 'сь', 'ть', 'нь', 'рь'], true)
+            || in_array(S::slice($word, -2), ['чь', 'сь', 'ть', 'нь', 'рь', 'дь'], true)
             || (static::isVowel($last) && in_array(S::slice($word, -2, -1), ['ч', 'к'], true))) { // before ч, чь, сь, ч+vowel, к+vowel
             $forms[Cases::IMENIT] = $prefix.'и';
         } elseif (in_array($last, ['н', 'ц', 'р', 'т'], true)) {
@@ -226,10 +213,10 @@ class NounPluralization extends \morphos\BasePluralization implements Cases
             } else {
                 $forms[Cases::RODIT] = $prefix;
             }
-        } elseif (S::slice($word, -2) == 'ка' && S::slice($word, -3, -2) !== 'и') { // words ending with -ка: чашка, вилка, ложка, тарелка, копейка, батарейка
+        } elseif (S::slice($word, -2) == 'ка' && S::slice($word, -3, -2) !== 'и') { // words ending with -ка: чашка, вилка, ложка, тарелка, копейка, батарейка, аптека
             if (S::slice($word, -3, -2) == 'л') {
                 $forms[Cases::RODIT] = S::slice($word, 0, -2).'ок';
-            } elseif (S::slice($word, -3, -2) == 'й') {
+            } elseif (in_array(S::slice($word, -3, -2), ['й', 'е'], true)) {
                 $forms[Cases::RODIT] = S::slice($word, 0, -3).'ек';
             } else {
                 $forms[Cases::RODIT] = S::slice($word, 0, -2).'ек';
@@ -238,7 +225,7 @@ class NounPluralization extends \morphos\BasePluralization implements Cases
             $forms[Cases::RODIT] = $prefix;
         } elseif (in_array($last, ['я'], true)) { // молния
             $forms[Cases::RODIT] = $prefix.'й';
-        } elseif (RussianLanguage::isHissingConsonant($last) || ($soft_last && $last != 'й') || in_array(S::slice($word, -2), ['чь', 'сь', 'ть', 'нь'], true)) {
+        } elseif (RussianLanguage::isHissingConsonant($last) || ($soft_last && $last != 'й') || in_array(S::slice($word, -2), ['чь', 'сь', 'ть', 'нь', 'дь'], true)) {
             $forms[Cases::RODIT] = $prefix.'ей';
         } elseif ($last == 'й' || S::slice($word, -2) == 'яц') { // месяц
             $forms[Cases::RODIT] = $prefix.'ев';
@@ -254,7 +241,7 @@ class NounPluralization extends \morphos\BasePluralization implements Cases
 
         // TVORIT
         // my personal rule
-        if ($last == 'ь' && $declension == NounDeclension::THIRD_DECLENSION && !in_array(S::slice($word, -2), ['чь', 'сь', 'ть', 'нь'], true)) {
+        if ($last == 'ь' && $declension == NounDeclension::THIRD_DECLENSION && !in_array(S::slice($word, -2), ['чь', 'сь', 'ть', 'нь', 'дь'], true)) {
             $forms[Cases::TVORIT] = $prefix.'ми';
         } else {
             $forms[Cases::TVORIT] = static::chooseVowelAfterConsonant($last, $soft_last && S::slice($word, -2, -1) != 'ч', $prefix.'ями', $prefix.'ами');
@@ -268,9 +255,10 @@ class NounPluralization extends \morphos\BasePluralization implements Cases
     /**
      * Склонение существительных, образованных от прилагательных и причастий.
      * Rules are from http://rusgram.narod.ru/1216-1231.html
-     * @param $word
-     * @param $animateness
-     * @return array
+     * @param string $word
+     * @param bool $animateness
+     * @return string[]
+     * @phpstan-return array<string, string>
      */
     protected static function declinateAdjective($word, $animateness)
     {

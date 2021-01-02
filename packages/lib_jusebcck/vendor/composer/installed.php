@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '4ccdb92a881aa3de076f6f1a265db460642b9d37',
+    'reference' => '98a7041d8fd7343071872ae3cf692604b4f831d7',
     'name' => 'joomla-ua/jusebcck',
   ),
   'versions' => 
@@ -54,7 +54,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '4ccdb92a881aa3de076f6f1a265db460642b9d37',
+      'reference' => '98a7041d8fd7343071872ae3cf692604b4f831d7',
     ),
     'opencage/geocode' => 
     array (
@@ -108,12 +108,12 @@
     ),
     'stichoza/google-translate-php' => 
     array (
-      'pretty_version' => 'v4.1.1',
-      'version' => '4.1.1.0',
+      'pretty_version' => 'v4.1.2',
+      'version' => '4.1.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2fc76c49b5f032c4210a98ced00e344d7d9022f2',
+      'reference' => '28cc8bcf7e39069d2f41b3905dea9d8f04c30b82',
     ),
     'visavi/cleanup' => 
     array (
@@ -126,12 +126,12 @@
     ),
     'wapmorgan/morphos' => 
     array (
-      'pretty_version' => '3.2.22',
-      'version' => '3.2.22.0',
+      'pretty_version' => '3.2.23',
+      'version' => '3.2.23.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6c845a04c6332616afa2c73afd0e103e6ee60b2d',
+      'reference' => '9ac1c108801a5144f43a8d2fc3de4d2c3d0a836c',
     ),
   ),
 );

@@ -10,12 +10,14 @@ class LastNamesInflection extends \morphos\NamesInflection implements Cases
 {
     use RussianLanguage, CasesHelper;
 
-    protected static $menPostfixes = ['ов', 'ев' ,'ин' ,'ын', 'ой', 'ий'];
+    /** @var string[] */
     protected static $womenPostfixes = ['ва', 'на', 'ая', 'яя'];
+    /** @var string[] */
+    protected static $menPostfixes = ['ов', 'ев' ,'ин' ,'ын', 'ой', 'ий'];
 
     /**
-     * @param $name
-     * @param null $gender
+     * @param string $name
+     * @param string|null $gender
      * @return bool
      */
     public static function isMutable($name, $gender = null)
@@ -77,7 +79,7 @@ class LastNamesInflection extends \morphos\NamesInflection implements Cases
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return null|string
      */
     public static function detectGender($name)
@@ -94,9 +96,10 @@ class LastNamesInflection extends \morphos\NamesInflection implements Cases
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @param null|string $gender
-     * @return array
+     * @return string[]
+     * @phpstan-return array<string, string>
      */
     public static function getCases($name, $gender = null)
     {
@@ -179,6 +182,18 @@ class LastNamesInflection extends \morphos\NamesInflection implements Cases
                         static::PREDLOJ => $prefix.'ой'
                     ];
                 }
+
+                if (in_array(S::slice($name, -2), ['яя'], true)) {
+                    $prefix = S::name(S::slice($name, 0, -2));
+                    return [
+                        static::IMENIT => S::name($name),
+                        static::RODIT => $prefix.'ей',
+                        static::DAT => $prefix.'ей',
+                        static::VINIT => $prefix.'юю',
+                        static::TVORIT => $prefix.'ей',
+                        static::PREDLOJ => $prefix.'ей'
+                    ];
+                }
             }
 
             if (S::slice($name, -1) == 'я') {
@@ -230,8 +245,8 @@ class LastNamesInflection extends \morphos\NamesInflection implements Cases
     }
 
     /**
-     * @param $name
-     * @param $case
+     * @param string $name
+     * @param string $case
      * @param null $gender
      * @return string
      * @throws \Exception
