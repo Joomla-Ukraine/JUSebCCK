@@ -16,20 +16,20 @@ use Emuravjev\Mdash\Typograph;
 
 class HTML
 {
-	/**
-	 * @param     $html
-	 * @param     $class
-	 * @param int $clean
-	 *
-	 * @return mixed
-	 *
-	 * @since 1.0
-	 */
 	public static function table($html, $class, $clean = 1)
 	{
 		if($clean)
 		{
 			$html = preg_replace('#<table.*?>#is', '<table>', $html);
+			$html = preg_replace('#<th.*align=".*?"#is', '<th', $html);
+			$html = preg_replace('#<td.*align=".*?"#is', '<td', $html);
+			$html = preg_replace('#<tr.*?height=".*?"#is', '<tr', $html);
+
+			$pos = strpos($html, 'style="text-align: center;"');
+			if($pos === false)
+			{
+				$html = preg_replace('# style=".*?"#is', '', $html);
+			}
 		}
 
 		return str_replace('<table', '<table class="' . $class . '"', $html);
@@ -39,7 +39,7 @@ class HTML
 	 * @param     $html
 	 * @param int $type
 	 *
-	 * @return mixed|string|string[]|null
+	 * @return string|string[]|null
 	 *
 	 * @since 1.0
 	 */
@@ -92,8 +92,8 @@ class HTML
 	}
 
 	/**
-	 * @param     $html
-	 * @param int $count
+	 * @param $html
+	 * @param $count
 	 *
 	 * @return object
 	 *
@@ -107,7 +107,12 @@ class HTML
 			$intro = $matches[ 0 ];
 		}
 
-		$full = str_replace([ strip_tags($intro), $intro, '</p>' ], '', $html);
+		$full = str_replace([
+			strip_tags($intro),
+			$intro
+		], '', $html);
+
+		$full = str_replace('</p>', '', $full);
 
 		return (object) [
 			'intro' => $intro,
@@ -118,7 +123,7 @@ class HTML
 	/**
 	 * @param $html
 	 *
-	 * @return mixed
+	 * @return string|string[]
 	 *
 	 * @since 1.0
 	 */
