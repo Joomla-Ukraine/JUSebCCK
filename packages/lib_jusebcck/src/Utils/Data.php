@@ -24,7 +24,7 @@ class Data
 	 *
 	 * @since 1.0
 	 */
-	public static function bind($result, $field, $config, $fields)
+	public static function bind($result, $field, &$config, $fields)
 	{
 		$name                                    = $fields[ $field ]->storage_field;
 		$table                                   = $fields[ $field ]->storage_table;

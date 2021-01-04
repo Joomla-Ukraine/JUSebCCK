@@ -19,7 +19,7 @@ class Schema
 	/**
 	 * @param array $data
 	 *
-	 * @return
+	 * @return mixed
 	 *
 	 * @since 1.0
 	 */
