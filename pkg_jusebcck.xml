@@ -4,7 +4,7 @@
     <packagename>jusebcck</packagename>
     <creationDate>@date@</creationDate>
     <packager>Joomla! Ukraine</packager>
-    <copyright>(C) 2019 Denys Nosov, Joomla! Ukraine</copyright>
+    <copyright>(C) 2019-2021 Denys Nosov, Joomla! Ukraine</copyright>
     <packageremail>denys@joomla-ua.org</packageremail>
     <packagerurl>https://joomla-ua.org</packagerurl>
     <author>Denys Nosov, Joomla! Ukraine</author>
@@ -13,6 +13,10 @@
     <version>@version@</version>
     <description/>
     <scriptfile>script.php</scriptfile>
+    <update>https://joomla-ua.org/update/pkg/jusebcck.xml</update>
+    <updateservers>
+        <server type="extension" priority="1" name="JUSebCCK">https://joomla-ua.org/update/pkg/jusebcck.xml</server>
+    </updateservers>
     <files folder="packages">
         <file type="plugin" id="jusebcck" group="system">plg_system_jusebcck.zip</file>
         <file type="library" id="jusebcck">lib_jusebcck.zip</file>
