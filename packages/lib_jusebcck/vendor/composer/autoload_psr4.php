@@ -8,7 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'morphos\\' => array($vendorDir . '/wapmorgan/morphos/src'),
     'Stichoza\\GoogleTranslate\\' => array($vendorDir . '/stichoza/google-translate-php/src'),
-    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src', $vendorDir . '/psr/http-factory/src'),
     'Psr\\Http\\Client\\' => array($vendorDir . '/psr/http-client/src'),
     'OpenCage\\Geocoder\\' => array($vendorDir . '/opencage/geocode/src'),
     'JUSebCCK\\' => array($baseDir . '/src'),
