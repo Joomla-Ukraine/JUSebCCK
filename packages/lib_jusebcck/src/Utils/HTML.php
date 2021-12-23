@@ -43,7 +43,7 @@ class HTML
 	 *
 	 * @since 1.0
 	 */
-	public static function typo($html, $type = 1)
+	public static function typo($html, int $type = 1)
 	{
 		$html = self::clean($html);
 
@@ -55,18 +55,34 @@ class HTML
 		$typograf->setup([
 			'Text.paragraphs'                   => 'off',
 			'Text.breakline'                    => 'off',
+			'Text.no_repeat_words'              => 'off',
 			'OptAlign.all'                      => 'off',
+			'OptAlign.layout'                   => 'off',
+			'Nobr.super_nbsp'                   => 'off',
 			'Nobr.spaces_nobr_in_surname_abbr'  => 'off',
 			'Nobr.nbsp_in_the_end'              => 'off',
 			'Nobr.phone_builder'                => 'off',
 			'Nobr.phone_builder_v2'             => 'off',
 			'Nobr.ip_address'                   => 'off',
 			'Nobr.dots_for_surname_abbr'        => 'off',
+			'Nobr.nbsp_celcius'                 => 'off',
 			'Nobr.hyphen_nowrap_in_small_words' => 'off',
-			'Abbr.nobr_abbreviation'            => 'off',
+			'Nobr.hyphen_nowrap'                => 'off',
+			'Punctmark.fix_pmarks'              => 'off',
+			'Punctmark.fix_excl_quest_marks'    => 'off',
+			'Punctmark.dot_on_end'              => 'off',
+			'Space.bracket_fix'                 => 'off',
+			'Abbr.nobr_vtch_itd_itp'            => 'off',
+			'Abbr.nobr_sm_im'                   => 'off',
 			'Abbr.nobr_acronym'                 => 'off',
-			'Etc.unicode_convert'               => 'off',
-			'Etc.split_number_to_triads'        => 'off'
+			'Abbr.nobr_locations'               => 'off',
+			'Abbr.nobr_abbreviation'            => 'off',
+			'Abbr.ps_pps'                       => 'off',
+			'Abbr.nbsp_org_abbr'                => 'off',
+			'Abbr.nobr_gost'                    => 'off',
+			'Abbr.nobr_before_unit_volt'        => 'off',
+			'Abbr.nbsp_before_unit'             => 'off',
+			'Etc.unicode_convert'               => 'off'
 		]);
 
 		$result = $typograf->apply();
@@ -107,12 +123,7 @@ class HTML
 			$intro = $matches[ 0 ];
 		}
 
-		$full = str_replace([
-			strip_tags($intro),
-			$intro
-		], '', $html);
-
-		$full = str_replace('</p>', '', $full);
+		$full = str_replace([ strip_tags($intro), $intro, '</p>' ], '', $html);
 
 		return (object) [
 			'intro' => $intro,
