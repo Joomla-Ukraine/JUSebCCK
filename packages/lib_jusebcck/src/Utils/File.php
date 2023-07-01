@@ -22,7 +22,7 @@ class File
 	 *
 	 * @since 1.0
 	 */
-	public static function save($url, $saveto)
+	public static function save($url, $saveto): bool
 	{
 		if(is_writable(dirname($saveto)))
 		{
@@ -44,7 +44,7 @@ class File
 	 *
 	 * @since 1.0
 	 */
-	public static function copy($path, $saveto)
+	public static function copy($path, $saveto): bool
 	{
 		if(is_writable(dirname($saveto)))
 		{

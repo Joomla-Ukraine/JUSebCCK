@@ -43,8 +43,7 @@ class Pkg_JUSebCCKInstallerScript
 		];
 
 		$folders = [
-			$path . 'classes',
-			$path . 'vendor'
+			$path . 'classes'
 		];
 
 		foreach($files as $file)

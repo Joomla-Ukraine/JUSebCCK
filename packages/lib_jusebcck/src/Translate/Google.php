@@ -25,7 +25,7 @@ class Google
 	 * @throws \ErrorException
 	 * @since 1.0
 	 */
-	public static function get($from, $to, $text)
+	public static function get($from, $to, $text): ?string
 	{
 		$tr = new GoogleTranslate();
 		$tr->setSource($from);

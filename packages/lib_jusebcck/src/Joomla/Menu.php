@@ -27,7 +27,7 @@ class Menu
 	 *
 	 * @since 1.0
 	 */
-	public static function addMenuItem($config, $fields, $field, array $attr = [])
+	public static function addMenuItem($config, $fields, $field, array $attr = []): bool
 	{
 		$item = $fields[ $field ]->value;
 		if($item == 0)
@@ -35,7 +35,7 @@ class Menu
 			$data = [
 				'menutype'          => $attr[ 'menutype' ],
 				'title'             => $attr[ 'title' ],
-				'alias'             => $attr[ 'alias' ] ? $attr[ 'alias' ] : '',
+				'alias'             => $attr[ 'alias' ] ? : '',
 				'link'              => $attr[ 'link' ],
 				'type'              => 'component',
 				'published'         => $attr[ 'published' ],

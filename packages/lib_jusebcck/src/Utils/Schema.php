@@ -37,7 +37,7 @@ class Schema
 	 *
 	 * @since 1.0
 	 */
-	private static function ldjson($json)
+	private static function ldjson($json): string
 	{
 		return '<script type="application/ld+json">' . json_encode(array_filter($json)) . '</script>';
 	}

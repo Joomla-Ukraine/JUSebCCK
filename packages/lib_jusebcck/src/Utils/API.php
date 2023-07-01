@@ -22,7 +22,7 @@ class API
 	 *
 	 * @since 1.0
 	 */
-	public static function get($url, array $data = [])
+	public static function get($url, array $data = []): array
 	{
 		$resource = self::getAPI($url, $data);
 
@@ -37,7 +37,7 @@ class API
 	 *
 	 * @since 1.0
 	 */
-	private static function getAPI($url, array $data = [])
+	private static function getAPI($url, array $data = []): string
 	{
 		if(is_array($data) && !empty($data))
 		{
@@ -64,7 +64,7 @@ class API
 	 *
 	 * @since 1.0
 	 */
-	private static function getJSON($url)
+	private static function getJSON($url): array
 	{
 		return get_object_vars(json_decode(@file_get_contents($url)));
 	}

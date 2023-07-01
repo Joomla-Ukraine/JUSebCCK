@@ -30,7 +30,7 @@ class User
 	 *
 	 * @since 1.0
 	 */
-	public static function id($id = null)
+	public static function id($id = null): ?int
 	{
 		return Factory::getUser($id)->id;
 	}
@@ -43,7 +43,7 @@ class User
 	 * @throws \Exception
 	 * @since 1.0
 	 */
-	public static function login($user_id = '153')
+	public static function login(string $user_id = '153'): bool
 	{
 		if(!Factory::getApplication()->isClient('administrator') && Factory::getUser()->guest)
 		{

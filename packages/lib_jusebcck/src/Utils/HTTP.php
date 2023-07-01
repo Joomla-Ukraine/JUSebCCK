@@ -20,7 +20,7 @@ class HTTP
 	 *
 	 * @since 1.0
 	 */
-	public static function ip()
+	public static function ip(): string
 	{
 		if(!empty(getenv('HTTP_CLIENT_IP')))
 		{

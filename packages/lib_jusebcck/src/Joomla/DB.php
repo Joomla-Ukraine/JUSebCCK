@@ -73,7 +73,7 @@ class DB
 	 *
 	 * @since 1.0
 	 */
-	public static function check($table, array $where = [], $operator = '='): int
+	public static function check($table, array $where = [], string $operator = '='): int
 	{
 		$db    = Factory::getDbo();
 		$query = $db->getQuery(true);

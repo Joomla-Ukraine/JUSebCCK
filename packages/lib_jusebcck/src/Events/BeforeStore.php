@@ -31,7 +31,7 @@ class BeforeStore
 	 *
 	 * @since 1.0
 	 */
-	public static function typo($config, $fields, $field, $tags = 1)
+	public static function typo($config, $fields, $field, int $tags = 1): bool
 	{
 		$result = HTML::typo($fields[ $field ]->value, $tags);
 
@@ -49,7 +49,7 @@ class BeforeStore
 	 *
 	 * @since 1.0
 	 */
-	public static function table($config, $fields, $field, $class, $clean = 1)
+	public static function table($config, $fields, $field, $class, int $clean = 1): bool
 	{
 		$result = HTML::table($fields[ $field ]->value, $class, $clean);
 
@@ -65,7 +65,7 @@ class BeforeStore
 	 *
 	 * @since 1.0
 	 */
-	public static function userID($config, $fields, $field)
+	public static function userID($config, $fields, $field): bool
 	{
 		if($config[ 'isNew' ] == 1)
 		{
@@ -87,7 +87,7 @@ class BeforeStore
 	 *
 	 * @since 1.0
 	 */
-	public static function bindDate($config, $fields, $created, $publish_up)
+	public static function bindDate($config, $fields, $created, $publish_up): bool
 	{
 		if($config[ 'isNew' ] == 1)
 		{
@@ -125,7 +125,7 @@ class BeforeStore
 	 *
 	 * @since 1.0
 	 */
-	public static function geoLocation($config, $fields, $provider, array $data = [])
+	public static function geoLocation($config, $fields, $provider, array $data = []): bool
 	{
 		$lat = $fields[ $data[ 'lat' ] ]->value;
 		$lng = $fields[ $data[ 'lng' ] ]->value;
@@ -151,7 +151,7 @@ class BeforeStore
 	 *
 	 * @since 1.0
 	 */
-	public static function checkVideo($config, $fields, $check_video, $video_source)
+	public static function checkVideo($config, $fields, $check_video, $video_source): bool
 	{
 		Video::checkVideo($config, $fields, $check_video, $video_source);
 
@@ -167,7 +167,7 @@ class BeforeStore
 	 *
 	 * @since 1.0
 	 */
-	public static function checkGallery($config, $fields, $field)
+	public static function checkGallery($config, $fields, $field): bool
 	{
 		Image::checkGallery($config, $fields, $field);
 
@@ -184,7 +184,7 @@ class BeforeStore
 	 *
 	 * @since 1.0
 	 */
-	public static function galleryImage($config, $fields, $field_img, $field_folder)
+	public static function galleryImage($config, $fields, $field_img, $field_folder): bool
 	{
 		Image::galleryImage($config, $fields, $field_img, $field_folder);
 
@@ -200,7 +200,7 @@ class BeforeStore
 	 *
 	 * @since 1.0
 	 */
-	public static function YouTubeLink($config, $fields, $field)
+	public static function YouTubeLink($config, $fields, $field): bool
 	{
 		Video::YouTubeLink($config, $fields, $field);
 
@@ -218,7 +218,7 @@ class BeforeStore
 	 *
 	 * @since 1.0
 	 */
-	public static function YouTubeFixLink($config, $fields, $field)
+	public static function YouTubeFixLink($config, $fields, $field): bool
 	{
 		Video::YouTubeFixLink($config, $fields, $field);
 
@@ -235,7 +235,7 @@ class BeforeStore
 	 *
 	 * @since 1.0
 	 */
-	public static function YouTubeCover($config, $fields, $field_img, $youtube)
+	public static function YouTubeCover($config, $fields, $field_img, $youtube): bool
 	{
 		Video::YouTubeCover($config, $fields, $field_img, $youtube);
 
@@ -253,7 +253,7 @@ class BeforeStore
 	 *
 	 * @since 1.0
 	 */
-	public static function YouTubeSaveCover($config, $fields, $field_img, $youtube, $path)
+	public static function YouTubeSaveCover($config, $fields, $field_img, $youtube, $path): bool
 	{
 		Video::YouTubeSaveCover($config, $fields, $field_img, $youtube, $path);
 

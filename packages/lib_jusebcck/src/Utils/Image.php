@@ -21,7 +21,7 @@ class Image
 	 *
 	 * @since 1.0
 	 */
-	public static function check($data)
+	public static function check($data): bool
 	{
 		$regex = '/{gallery\s+(.*?)}/i';
 
@@ -74,7 +74,7 @@ class Image
 	 *
 	 * @since 1.0
 	 */
-	public static function galleryImage($config, $fields, $field_img, $field_folder)
+	public static function galleryImage($config, $fields, $field_img, $field_folder): bool
 	{
 		if($fields[ $field_img ]->value == '')
 		{
@@ -97,7 +97,7 @@ class Image
 	 *
 	 * @since 1.0
 	 */
-	public static function checkGallery($config, $fields, $field)
+	public static function checkGallery($config, $fields, $field): bool
 	{
 		$check = self::check($fields[ $field ]->value);
 

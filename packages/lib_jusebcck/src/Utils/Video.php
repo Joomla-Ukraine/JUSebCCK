@@ -21,7 +21,7 @@ class Video
 	 *
 	 * @since 1.0
 	 */
-	public static function check($data)
+	public static function check($data): bool
 	{
 		$regex1 = '%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^>"&?/ ]{11})%i';
 		$regex2 = '#(player.vimeo.com)/video/([\d]+)#i';
@@ -178,7 +178,7 @@ class Video
 	 *
 	 * @since 1.0
 	 */
-	public static function checkVideo($config, $fields, $check_video, $video_source)
+	public static function checkVideo($config, $fields, $check_video, $video_source): bool
 	{
 		$check = self::check($fields[ $video_source ]->value);
 
@@ -196,7 +196,7 @@ class Video
 	 *
 	 * @since 1.0
 	 */
-	public static function YouTubeLink($config, $fields, $field)
+	public static function YouTubeLink($config, $fields, $field): bool
 	{
 		if($url = $fields[ $field ]->value)
 		{
@@ -219,7 +219,7 @@ class Video
 	 *
 	 * @since 1.0
 	 */
-	public static function YouTubeFixLink($config, $fields, $field)
+	public static function YouTubeFixLink($config, $fields, $field): bool
 	{
 		if($url = $fields[ $field ]->value)
 		{
@@ -248,7 +248,7 @@ class Video
 	 *
 	 * @since 1.0
 	 */
-	public static function YouTubeSaveCover($config, $fields, $field_img, $youtube, $path)
+	public static function YouTubeSaveCover($config, $fields, $field_img, $youtube, $path): bool
 	{
 		$youtube_img = self::video($youtube);
 		$hash        = hash('crc32b', $youtube_img);
@@ -271,7 +271,7 @@ class Video
 	 *
 	 * @since 1.0
 	 */
-	public static function YouTubeCover($config, $fields, $field_img, $youtube)
+	public static function YouTubeCover($config, $fields, $field_img, $youtube): bool
 	{
 		$youtube_img = self::video($youtube);
 

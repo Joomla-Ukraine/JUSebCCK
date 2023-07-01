@@ -23,7 +23,7 @@ class Cache
 	 *
 	 * @since 1.0
 	 */
-	public static function clear($all = true)
+	public static function clear(bool $all = true): bool
 	{
 		if(is_dir(JPATH_ROOT . '/cache/'))
 		{

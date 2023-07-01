@@ -22,7 +22,7 @@ class Folder
 	 *
 	 * @since 1.0
 	 */
-	public static function create($dir, $mode = 0777)
+	public static function create($dir, int $mode = 0777): bool
 	{
 		if(@mkdir($dir, $mode) || is_dir($dir))
 		{
@@ -45,7 +45,7 @@ class Folder
 	 *
 	 * @since 1.0
 	 */
-	public static function remove($dir, $deleteRootToo = false)
+	public static function remove($dir, bool $deleteRootToo = false): bool
 	{
 		$folders = glob($dir, GLOB_BRACE);
 

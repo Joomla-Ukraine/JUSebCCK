@@ -39,19 +39,23 @@
     "prefer-dist": true,
     "no-dev": true,
     "sort-packages": true,
-    "archive-format": "zip"
+    "archive-format": "zip",
+    "platform": {
+      "php": "8.0"
+    }
   },
   "prefer-stable": true,
   "suggest": {
   },
   "require": {
+    "php": ">=8.0",
     "ext-curl": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
     "emuravjev/mdash": "^0.2.1",
-    "stichoza/google-translate-php": "^4.1",
+    "joomla-ua/jutypo": "^0.4.0",
     "opencage/geocode": "^2.1",
-    "visavi/cleanup": "^1.5",
-    "wapmorgan/morphos": "^3.2"
+    "stichoza/google-translate-php": "^4.1",
+    "visavi/cleanup": "^1.5"
   }
 }

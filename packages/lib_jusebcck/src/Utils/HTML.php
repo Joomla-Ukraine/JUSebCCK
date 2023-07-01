@@ -12,7 +12,7 @@
 
 namespace JUSebCCK\Utils;
 
-use Emuravjev\Mdash\Typograph;
+use JUTypo\JUTypo;
 
 class HTML
 {
@@ -50,42 +50,9 @@ class HTML
 		preg_match_all('!(\[socpost\].*?\[/socpost\])!si', $html, $pre);
 		$html = preg_replace('!\[socpost\].*?\[/socpost\]!si', '#pre#', $html);
 
-		$typograf = new Typograph();
-		$typograf->set_text($html);
-		$typograf->setup([
-			'Text.paragraphs'                   => 'off',
-			'Text.breakline'                    => 'off',
-			'Text.no_repeat_words'              => 'off',
-			'OptAlign.all'                      => 'off',
-			'OptAlign.layout'                   => 'off',
-			'Nobr.super_nbsp'                   => 'off',
-			'Nobr.spaces_nobr_in_surname_abbr'  => 'off',
-			'Nobr.nbsp_in_the_end'              => 'off',
-			'Nobr.phone_builder'                => 'off',
-			'Nobr.phone_builder_v2'             => 'off',
-			'Nobr.ip_address'                   => 'off',
-			'Nobr.dots_for_surname_abbr'        => 'off',
-			'Nobr.nbsp_celcius'                 => 'off',
-			'Nobr.hyphen_nowrap_in_small_words' => 'off',
-			'Nobr.hyphen_nowrap'                => 'off',
-			'Punctmark.fix_pmarks'              => 'off',
-			'Punctmark.fix_excl_quest_marks'    => 'off',
-			'Punctmark.dot_on_end'              => 'off',
-			'Space.bracket_fix'                 => 'off',
-			'Abbr.nobr_vtch_itd_itp'            => 'off',
-			'Abbr.nobr_sm_im'                   => 'off',
-			'Abbr.nobr_acronym'                 => 'off',
-			'Abbr.nobr_locations'               => 'off',
-			'Abbr.nobr_abbreviation'            => 'off',
-			'Abbr.ps_pps'                       => 'off',
-			'Abbr.nbsp_org_abbr'                => 'off',
-			'Abbr.nobr_gost'                    => 'off',
-			'Abbr.nobr_before_unit_volt'        => 'off',
-			'Abbr.nbsp_before_unit'             => 'off',
-			'Etc.unicode_convert'               => 'off'
-		]);
-
-		$result = $typograf->apply();
+		$typo   = new JUTypo();
+		$typo->enableRule('*');
+		$result = $typo->apply($html);
 
 		if($type == 0)
 		{
@@ -105,30 +72,6 @@ class HTML
 		}
 
 		return $result;
-	}
-
-	/**
-	 * @param $html
-	 * @param $count
-	 *
-	 * @return object
-	 *
-	 * @since 1.0
-	 */
-	public static function breakdown($html, $count = 100)
-	{
-		$intro = '';
-		if(preg_match('#^.{' . $count . '}.*?[.!?]#is', $html, $matches))
-		{
-			$intro = $matches[ 0 ];
-		}
-
-		$full = str_replace([ strip_tags($intro), $intro, '</p>' ], '', $html);
-
-		return (object) [
-			'intro' => $intro,
-			'full'  => $full
-		];
 	}
 
 	/**

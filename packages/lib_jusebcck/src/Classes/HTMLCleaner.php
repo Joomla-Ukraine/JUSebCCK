@@ -17,8 +17,8 @@ define('ATTRIB_BLACKLIST', 1);
 
 class HTMLCleaner {
 
-    public $Options;
-    public $Tag_whitelist = '<table><tbody><thead><tfoot><tr><th><td><colgroup><col>
+    public array $Options;
+    public string $Tag_whitelist = '<table><tbody><thead><tfoot><tr><th><td><colgroup><col>
 		<p><br><hr><blockquote>
 		<b><i><u><sub><sup><strong><em><tt><var>
 		<code><xmp><cite><pre><abbr><acronym><address><samp>
@@ -29,11 +29,11 @@ class HTMLCleaner {
 		<frame><frameset>
 		<form><input><select><option><optgroup><button><textarea>';
 
-    public $Attrib_blacklist = 'id|on[\w]+';
-    public $CleanUpTags = array( 'a', 'span', 'b', 'i', 'u', 'strong', 'em', 'big', 'small', 'tt', 'var', 'code', 'xmp', 'cite', 'pre', 'abbr', 'acronym', 'address', 'q', 'samp', 'sub', 'sup'); //array of inline tags that can be merged
-    public $TidyConfig;
-    public $Encoding = 'utf8';
-    public $Version = '1.2';
+    public string $Attrib_blacklist = 'id|on[\w]+';
+    public array $CleanUpTags = array( 'a', 'span', 'b', 'i', 'u', 'strong', 'em', 'big', 'small', 'tt', 'var', 'code', 'xmp', 'cite', 'pre', 'abbr', 'acronym', 'address', 'q', 'samp', 'sub', 'sup'); //array of inline tags that can be merged
+    public array $TidyConfig;
+    public string $Encoding = 'utf8';
+    public string $Version = '1.2';
 	private $html;
 
 	public function __construct() {
@@ -67,7 +67,8 @@ class HTMLCleaner {
 
     /* ----------------------------------------------------------------------------- */
 
-    public function RemoveBlacklistedAttributes($attribs) {
+    public function RemoveBlacklistedAttributes($attribs): void
+    {
 		// the attribute _must_ have a line-break or a space before
 		$this->html = preg_replace('/[\s]+(' . $attribs . ')=[\s]*("[^"]*"|\'[^\']*\')/i', '', $this->html); //double and single quoted
 		$this->html = preg_replace('/[\s]+(' . $attribs . ')=[\s]*[^ |^>]*/i', '', $this->html);  //not quoted
@@ -75,7 +76,8 @@ class HTMLCleaner {
 
     /* ----------------------------------------------------------------------------- */
 
-    public function TidyClean() {
+    public function TidyClean(): void
+    {
 		if (!class_exists('tidy')) {
 		    if (function_exists('tidy_parse_string')) {
 			//use procedural style for compatibility with PHP 4.3
@@ -139,7 +141,7 @@ class HTMLCleaner {
 		//++++
 		if ($this->Options['CleaningMethod'][0] == TAG_WHITELIST) {
 		    // trim everything before the body tag right away, leaving possibility for body attributes  
-		    if (preg_match('/<body/i', (string) $this->html)) {
+		    if (preg_match('/<body/i', $this->html)) {
 				$this->html = stristr($this->html, '<body');
 		    }
 
@@ -168,9 +170,9 @@ class HTMLCleaner {
 		//++++
 		if ($this->Options['Optimize']) {
 		    //Optimize until nothing can be done for PHP 5, twice for PHP 4
-		    if ((int) PHP_VERSION >= 5) {
 			$repl = 1;
-			while ($repl) {
+			if ((int) PHP_VERSION >= 5) {
+				while ($repl) {
 			    $repl = 0;
 			    foreach ($this->CleanUpTags as $tag) {
 					$this->html = preg_replace("/<($tag)[^>]*>[\s]*([(&nbsp;)]*)[\s]*<\/($tag)>/i", "\\2", $this->html, -1, $count); //strip empty inline tags (must be on top of merge inline tags)
@@ -180,8 +182,7 @@ class HTMLCleaner {
 			    }
 			}
 		    } else {//PHP 4
-			$repl = 1;
-			while ($repl) {
+				while ($repl) {
 			    $repl = 0;
 			    foreach ($this->CleanUpTags as $tag) {
 					$count = preg_match("/<($tag)[^>]*>[\s]*([(&nbsp;)]*)[\s]*<\/($tag)>/i", $this->html);

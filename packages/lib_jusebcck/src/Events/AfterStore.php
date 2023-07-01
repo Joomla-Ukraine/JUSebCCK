@@ -27,20 +27,8 @@ class AfterStore
 	 *
 	 * @since 1.0
 	 */
-	public static function addMenuItem($config, $fields, $field, array $attr = [])
+	public static function addMenuItem($config, $fields, $field, array $attr = []): bool
 	{
 		return Menu::addMenuItem($config, $fields, $field, $attr);
-	}
-
-	/**
-	 * @param $config
-	 *
-	 * @return bool
-	 *
-	 * @since 1.0
-	 */
-	public static function rating($config)
-	{
-		return Article::rating($config);
 	}
 }
