@@ -20,16 +20,17 @@ class Menu
 	/**
 	 * @param       $config
 	 * @param       $fields
-	 * @param       $field
+	 * @param       $f_text
 	 * @param array $attr
 	 *
 	 * @return bool
 	 *
 	 * @since 1.0
 	 */
-	public static function addMenuItem($config, $fields, $field, array $attr = []): bool
+	public static function addMenuItem($config, $fields, $f_text, array $attr = []): bool
 	{
-		$item = $fields[ $field ]->value;
+		$item = $fields[ $f_text ]->value;
+
 		if($item == 0)
 		{
 			$data = [
@@ -44,7 +45,7 @@ class Menu
 				'component_id'      => $attr[ 'component_id' ],
 				'access'            => 1,
 				'template_style_id' => 0,
-				'params'            => '{"show_list_title":"","tag_list_title":"h1","class_list_title":"","display_list_title":"0","title_list_title":"","show_list_desc":"","list_desc":"","tag_list_desc":"div","show_form":"","show_list":"","auto_redirect":"","auto_redirect_vars":"","limit2":"0","pagination2":"","ordering":"","order_by":"","ordering2":"","show_items_number":"","show_items_number_label":"Results","class_items_number":"total","show_pages_number":"","show_pagination":"","class_pagination":"pagination","live":"' . $attr[ 'cat_id' ] . '","variation":"","search2":"","limit":"0","raw_rendering":"1","sef":"","display_form_title":"","title_form_title":"","urlvars":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_image_css":"","menu_text":1,"menu_show":1,"page_title":"","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}',
+				'params'            => '{"show_list_title":"","tag_list_title":"h1","class_list_title":"","display_list_title":"0","title_list_title":"","show_list_desc":"","list_desc":"","tag_list_desc":"div","show_form":"","show_list":"","auto_redirect":"","auto_redirect_vars":"","limit2":"0","pagination2":"","ordering":"","order_by":"","ordering2":"","show_items_number":"","show_items_number_label":"Results","class_items_number":"total","show_pages_number":"","show_pagination":"","class_pagination":"pagination","live":"' . $attr[ 'cat_id' ] . '","variation":"","search2":"","limit":"0","raw_rendering":"1","sef":"","display_form_title":"","title_form_title":"","urlvars":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","menu_image_css":"","menu_text":1,"menu_show":1,"page_title":"' . $attr[ 'meta_title' ] . '","show_page_heading":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"' . $attr[ 'meta_description' ] . '","menu-meta_keywords":"' . $attr[ 'meta_keywords' ] . '","robots":"","secure":0}',
 				'home'              => 0,
 				'language'          => $attr[ 'lang' ],
 				'client_id'         => 0
@@ -79,13 +80,15 @@ class Menu
 			$query->where($db->quoteName('home') . ' = ' . $db->quote($data[ 'home' ]));
 			$db->setQuery($query);
 
-			if($result = $db->loadResult())
+			$result = $db->loadResult();
+
+			if($result)
 			{
 				$object                                      = new stdClass();
 				$object->id                                  = $config[ 'pk' ];
-				$object->{$fields[ $field ]->storage_field} = $result;
+				$object->{$fields[ $f_text ]->storage_field} = $result;
 
-				$db->updateObject($fields[ $field ]->storage_table, $object, 'id');
+				$db->updateObject($fields[ $f_text ]->storage_table, $object, 'id');
 			}
 
 			return true;
