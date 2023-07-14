@@ -1,13 +1,13 @@
 <?php
 /**
- * @package        JUSebCCK\Joomla
+ * @since          1.0
  * @subpackage     Class
  *
  * @author         Denys D. Nosov (denys@joomla-ua.org)
  * @copyright (C)  2019-2021 by Denys D. Nosov (https://joomla-ua.org)
  * @license        GNU General Public License version 2 or later
  *
- * @since          1.0
+ * @package        JUSebCCK\Joomla
  */
 
 namespace JUSebCCK\Joomla;
@@ -18,10 +18,10 @@ use Joomla\CMS\Table\Nested;
 class Menu
 {
 	/**
-	 * @param       $config
-	 * @param       $fields
-	 * @param       $f_text
-	 * @param array $attr
+	 * @param          $config
+	 * @param          $fields
+	 * @param          $f_text
+	 * @param   array  $attr
 	 *
 	 * @return bool
 	 *
@@ -31,12 +31,12 @@ class Menu
 	{
 		$item = $fields[ $f_text ]->value;
 
-		if($item == 0)
+		if($item == 0 || $item === '')
 		{
 			$data = [
 				'menutype'          => $attr[ 'menutype' ],
 				'title'             => $attr[ 'title' ],
-				'alias'             => $attr[ 'alias' ] ? : '',
+				'alias'             => $attr[ 'alias' ],
 				'link'              => $attr[ 'link' ],
 				'type'              => 'component',
 				'published'         => $attr[ 'published' ],
@@ -84,7 +84,7 @@ class Menu
 
 			if($result)
 			{
-				$object                                      = new stdClass();
+				$object                                      = new \stdClass();
 				$object->id                                  = $config[ 'pk' ];
 				$object->{$fields[ $f_text ]->storage_field} = $result;
 
