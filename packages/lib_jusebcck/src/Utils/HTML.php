@@ -36,8 +36,8 @@ class HTML
 	}
 
 	/**
-	 * @param     $html
-	 * @param int $type
+	 * @param        $html
+	 * @param   int  $type
 	 *
 	 * @return string|string[]|null
 	 *
@@ -50,17 +50,28 @@ class HTML
 		preg_match_all('!(\[socpost\].*?\[/socpost\])!si', $html, $pre);
 		$html = preg_replace('!\[socpost\].*?\[/socpost\]!si', '#pre#', $html);
 
-		$typo   = new JUTypo();
+		$html = str_replace([
+			'\"',
+			'\»',
+			"\'",
+			"\`",
+		], [ '"', '»', "'", '`' ], $html);
+
+		$typo = new JUTypo();
 		$typo->enableRule('*');
 		$result = $typo->apply($html);
 
 		if($type == 0)
 		{
-			$result = html_entity_decode(strip_tags($result));
+			$result = html_entity_decode(strip_tags($result), ENT_NOQUOTES);
 		}
 		else
 		{
-			$result = str_replace('<p></p>', '', $result);
+			$result = str_replace([
+				'<p></p>',
+				'<p> </p>',
+				'<p>&nbsp;</p>'
+			], '', $result);
 
 			if(!empty($pre[ 0 ]))
 			{
