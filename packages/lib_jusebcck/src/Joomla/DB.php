@@ -29,7 +29,7 @@ class DB
 	 *
 	 * @since 1.0
 	 */
-	public static function selectDB($table, int $type = 1, array $select = [ '*' ], array $where = [], string $operator = '=')
+	public static function selectDB($table, int $type = 1, array $select = [ '*' ], array $where = [], string $operator = '=', string $order = null)
 	{
 		$db    = Factory::getDbo();
 		$query = $db->getQuery(true);
@@ -46,6 +46,11 @@ class DB
 			{
 				$query->where($db->quoteName($key) . $operator . $db->Quote($value));
 			}
+		}
+
+		if($order)
+		{
+			$query->order($order);
 		}
 
 		$db->setQuery($query);
